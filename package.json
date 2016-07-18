@@ -1,0 +1,28 @@
+{
+  "name": "food_bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node facebook_bot.js"
+  },
+  "author": "rte",
+  "license": "ISC",
+  "homepage": "http://howdy.ai/botkit3",
+  "description": "ertre",
+  "dependencies": {
+    "botkit": "^0.2.2",
+    "cheerio": "^0.20.0",
+    "express": "^4.13.3",
+    "localtunnel": "^1.8.1",
+    "mkpath": "^1.0.0",
+    "moment": "^2.13.0",
+    "nconf": "^0.8.4",
+    "pg": "^6.0.2",
+    "pg-hstore": "^2.3.2",
+    "request": "^2.67.0",
+    "sequelize": "^3.23.4",
+    "ware": "^1.3.0",
+    "winston": "^2.2.0"
+  }
+}

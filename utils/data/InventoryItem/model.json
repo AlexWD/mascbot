@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Burger extra chees",
+    "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
+    "price": 23,
+    "quantity": 100,
+    "image": "http://test.designforu.ru/ii/burger.jpeg"
+  },
+  {
+    "title": "Burger",
+    "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
+    "price": 12,
+    "quantity": 100,
+    "image": "http://test.designforu.ru/ii/burger.jpeg"
+  },
+  {
+    "title": "Fries",
+    "description": "simple french fries",
+    "price": 12,
+    "quantity": 100,
+    "image": "http://test.designforu.ru/ii/fries.jpeg"
+  },
+  {
+    "title": "Stadium Hotdog",
+    "description": "Stadium Dog",
+    "price": 12,
+    "quantity": 100,
+    "image": "http://test.designforu.ru/ii/hotdog.jpeg"
+  },
+  {
+    "title": "Nachos with cheese",
+    "description": "Totilla chips, nachos chese and jalapenos",
+    "price": 12,
+    "quantity": 100,
+    "image": "http://test.designforu.ru/ii/nachos.jpeg"
+  },
+  {
+    "title": "Popcorn",
+    "description": "",
+    "price": 12,
+    "quantity": 100,
+    "image": "http://test.designforu.ru/ii/popcorn.jpeg"
+  },
+  {
+    "title": "Pretzel",
+    "description": "bavarian pretzel",
+    "price": 12,
+    "quantity": 100,
+    "image": "http://test.designforu.ru/ii/pretzel.jpeg"
+  }
+]

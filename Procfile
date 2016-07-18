@@ -1,0 +1,1 @@
+web: node utils/create_db.js && node facebook_bot.js
