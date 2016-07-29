@@ -42,8 +42,6 @@ let Model = db.sequelize.define('InventoryItem', {
 
 	type: {
 		type: db.Sequelize.ENUM('PRODUCT', 'VARIANT', 'COMPLEX'),
-		allowNull: false,
-		defaultValue: 'EMPTY'
 	},
 
 }, {

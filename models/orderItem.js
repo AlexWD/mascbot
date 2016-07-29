@@ -22,6 +22,11 @@ let Model = db.sequelize.define('OrderItems', {
 		defaultValue: 0.0
 	},
 
+	order_association_id: {
+		type: db.Sequelize.INTEGER,
+		defaultValue: null
+	},
+
 }, {
 	tableName: 'order_items',
 	instanceMethods: {

@@ -30,8 +30,6 @@ let Model = db.sequelize.define('Order', {
 
 	status: {
 		type: db.Sequelize.ENUM('EMPTY', 'NEW', 'FINISHED'),
-		allowNull: false,
-		defaultValue: 'EMPTY'
 	},
 
 	stadium: {

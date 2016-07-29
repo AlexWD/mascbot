@@ -1,0 +1,84 @@
+{
+  "initial":
+  {
+    "text": "What is the order status?",
+    "attachments": [
+        {
+            "text": "Choose order status",
+            "fallback": "You are unable to choose status",
+            "callback_id": "order_status",
+            "color": "#3AA3E3",
+            "attachment_type": "default",
+            "actions": [
+                {
+                    "name": "picked_up",
+                    "text": "Picked Up",
+                    "type": "button",
+                    "value": "picked_up"
+                },
+                {
+                    "name": "delivered",
+                    "text": "Delivered",
+                    "type": "button",
+                    "value": "delivered"
+                },
+                {
+                    "name": "cancel",
+                    "text": "Cancel",
+                    "style": "danger",
+                    "type": "button",
+                    "value": "cancel",
+                    "confirm": {
+                        "title": "Confirm Cancel",
+                        "text": "Are you sure you want to cancel?",
+                        "ok_text": "Yes",
+                        "dismiss_text": "No"
+                    }
+                }
+            ]
+        }
+    ]
+  },
+  "picked_up": 
+  {
+    "text": "What is the order status?",
+    "attachments": [
+        {
+            "text": "Choose order status",
+            "fallback": "You are unable to choose status",
+            "callback_id": "order_status",
+            "color": "#3AA3E3",
+            "attachment_type": "default",
+            "actions": [
+                {
+                    "name": "delivered",
+                    "text": "Delivered",
+                    "type": "button",
+                    "value": "delivered"
+                },
+                {
+                    "name": "cancel",
+                    "text": "Cancel",
+                    "style": "danger",
+                    "type": "button",
+                    "value": "cancel",
+                    "confirm": {
+                        "title": "Confirm Cancel",
+                        "text": "Are you sure you want to cancel?",
+                        "ok_text": "Yes",
+                        "dismiss_text": "No"
+                    }
+                }
+            ]
+        }
+    ]
+  },
+  "delivered":
+  {
+    "text": "Thank you for completing the order"
+  },
+  "cancel": 
+  {
+    "text": "The order has been cancelled"
+  }
+}
