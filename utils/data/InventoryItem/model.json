@@ -4,6 +4,15 @@
     "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
     "price": 12,
     "quantity": 100,
+    "type": "PRODUCT",
+    "image": "http://test.designforu.ru/ii/burger.jpeg"
+  },
+  {
+    "title": "Burger type 1",
+    "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
+    "price": 18,
+    "quantity": 100,
+    "type": "VARIANT",
     "image": "http://test.designforu.ru/ii/burger.jpeg"
   },
   {
@@ -11,6 +20,7 @@
     "description": "simple french fries",
     "price": 12,
     "quantity": 100,
+    "type": "PRODUCT",
     "image": "http://test.designforu.ru/ii/fries.jpeg"
   },
   {
@@ -18,6 +28,7 @@
     "description": "Stadium Dog",
     "price": 12,
     "quantity": 100,
+    "type": "PRODUCT",
     "image": "http://test.designforu.ru/ii/hotdog.jpeg"
   },
   {
@@ -25,6 +36,7 @@
     "description": "Totilla chips, nachos chese and jalapenos",
     "price": 12,
     "quantity": 100,
+    "type": "PRODUCT",
     "image": "http://test.designforu.ru/ii/nachos.jpeg"
   },
   {
@@ -32,6 +44,7 @@
     "description": "",
     "price": 12,
     "quantity": 100,
+    "type": "PRODUCT",
     "image": "http://test.designforu.ru/ii/popcorn.jpeg"
   },
   {
@@ -39,6 +52,7 @@
     "description": "bavarian pretzel",
     "price": 12,
     "quantity": 100,
+    "type": "PRODUCT",
     "image": "http://test.designforu.ru/ii/pretzel.jpeg"
   },
   {
@@ -46,6 +60,7 @@
     "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
     "price": 23,
     "quantity": 100,
+    "type": "PRODUCT",
     "image": "http://test.designforu.ru/ii/burger.jpeg"
   }
 ]
