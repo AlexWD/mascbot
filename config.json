@@ -20,7 +20,7 @@
     "url":"postgresql://test:test@localhost:5495/test_facebook"
   },
   "bot" : {
-    "debug": true,
+    "debug": false,
     "port": 5777,
     "page_token": "EAAEXx1to98MBALQPyCUZBnIGXOdaNXkapwyxkkaJCzvxMIv887u5RFYEYJxPgf2wNeElZC47KZASHcZBn8x4IkZC5qFhiRiZCskHx4hM3oZBfXtcfav7QG76TnTnuztBJkZCMLfycZBhKKXENgmSWk6HZBrLOOrIIRv5tiq5ZCAY9y65fdv9ZAZCiNUyF",
     "verify_token": "testbot"

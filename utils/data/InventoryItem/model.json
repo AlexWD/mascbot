@@ -1,12 +1,5 @@
 [
   {
-    "title": "Burger extra chees",
-    "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
-    "price": 23,
-    "quantity": 100,
-    "image": "http://test.designforu.ru/ii/burger.jpeg"
-  },
-  {
     "title": "Burger",
     "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
     "price": 12,
@@ -47,5 +40,12 @@
     "price": 12,
     "quantity": 100,
     "image": "http://test.designforu.ru/ii/pretzel.jpeg"
+  },
+  {
+    "title": "Burger extra chees",
+    "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
+    "price": 23,
+    "quantity": 100,
+    "image": "http://test.designforu.ru/ii/burger.jpeg"
   }
 ]

@@ -1,11 +1,16 @@
 'use strict';
 
-let Sequelize = require('sequelize');
-let config = require('./config');
-let logger = require('./logger');
+const Sequelize = require('sequelize');
+const config = require('./config');
+const logger = require('./logger');
 
 // ORM connection settings
-let sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url);
+const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
+	define: {
+		charset: 'utf8',
+		collate: 'utf8_general_ci',
+	},
+});
 
 /**
  * Connects to PostgreSQL showing an error if failing.

@@ -13,13 +13,13 @@ let Model = db.sequelize.define('OrderItems', {
 	quantity: {
 		type: db.Sequelize.INTEGER,
 		allowNull: false,
-		defaultValue: 0
+		defaultValue: 0,
 	},
 
 	price: {
 		type: db.Sequelize.DECIMAL(10, 2),
 		allowNull: false,
-		defaultValue: 0.0
+		defaultValue: 0.0,
 	},
 
 }, {
@@ -28,7 +28,7 @@ let Model = db.sequelize.define('OrderItems', {
 
 		getAmount() {
 			return this.get('quantity') * this.get('price');
-		}
+		},
 
 	},
 });

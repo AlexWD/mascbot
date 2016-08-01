@@ -13,31 +13,31 @@ let Model = db.sequelize.define('Order', {
 	game: {
 		type: db.Sequelize.STRING,
 		allowNull: false,
-		defaultValue: ""
+		defaultValue: '',
 	},
 
 	phone: {
 		type: db.Sequelize.STRING,
 		allowNull: false,
-		defaultValue: ""
+		defaultValue: '',
 	},
 
 	seat_address: {
 		type: db.Sequelize.STRING,
 		allowNull: false,
-		defaultValue: ""
+		defaultValue: '',
 	},
 
 	status: {
 		type: db.Sequelize.ENUM('EMPTY', 'NEW', 'FINISHED'),
 		allowNull: false,
-		defaultValue: 'EMPTY'
+		defaultValue: 'EMPTY',
 	},
 
 	stadium: {
 		type: db.Sequelize.STRING,
 		allowNull: false,
-		defaultValue: ""
+		defaultValue: '',
 	},
 
 }, {
@@ -45,43 +45,44 @@ let Model = db.sequelize.define('Order', {
 	indexes: [
 		{
 			name: 'index_orders_on_game',
-				unique: false,
+			unique: false,
 			method: 'BTREE',
 			fields: ['game'],
 		},
 		{
 			name: 'index_orders_on_seat_address',
-				unique: false,
+			unique: false,
 			method: 'BTREE',
 			fields: ['seat_address'],
 		},
 		{
 			name: 'index_orders_on_stadium',
-				unique: false,
+			unique: false,
 			method: 'BTREE',
 			fields: ['stadium'],
 		},
 	],
 	instanceMethods: {
 
-		getAmount(){
+		getAmount() {
 			return new Promise((resolve, reject) => {
 				this.getOrderItems().then(items => {
 					resolve(items.reduce((result, item) => {
-						return result += item.getAmount();
+						return result + item.getAmount();
 					}, 0))
 				}).catch(reject)
 			})
-		}
+		},
 
 	},
 
 	classMethods: {
 
-		NEW:'NEW',
-		FINISHED:'FINISHED'
+		NEW: 'NEW',
+		FINISHED: 'FINISHED',
 
-	}
+	},
+
 });
 
 module.exports = Model;

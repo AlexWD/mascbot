@@ -1,19 +1,20 @@
 'use strict';
 
-const Button = require('./botapi/structured_content').Button;
-const Attachment = require('./botapi/structured_content').Attachment;
-const ButtonsTemplate = require('./botapi/structured_content').ButtonsTemplate;
-const GenericElement = require('./botapi/structured_content').GenericElement;
-const GenericTemplate = require('./botapi/structured_content').GenericTemplate;
+const Button = require('./botapi/structure_content/button');
+const Attachment = require('./botapi/structure_content/attachment');
+const ButtonsTemplate = require('./botapi/structure_content/buttons_template');
+const GenericElement = require('./botapi/structure_content/generic_element');
+const GenericTemplate = require('./botapi/structure_content/generic_template');
+const QuickReplies = require('./botapi/structure_content/quick_replies');
 const logger = require('./logger');
-const OrderItem = require('./models/models').OrderItem;
 const InventoryItem = require('./models/models').InventoryItem;
+const UserModel = require('./models/models').User;
 const Order = require('./order');
-
+const ConversationLogger = require('./botapi/Logging');
 
 class Menu {
 
-	constructor(bot, message, controller){
+	constructor(bot, message, controller) {
 		this.bot = bot;
 		this.message = message;
 		this.controller = controller;
@@ -32,68 +33,93 @@ class Menu {
 	}
 
 	start() {
-		this.bot.startConversation(this.message, (err, convo) => {
-			if (!err) {
-				this.updateContext(convo);
-				this.showMainMenu();
-			} else {
-				logger.error(err);
-			}
+		this.startConversation().then(() => {
+			this.showMainMenu();
 		})
 	}
 
-	updateContext(convo){
+	startConversation() {
+		return new Promise((resolve, reject) => {
+			this.bot.startConversation(this.message, (err, convo) => {
+				if (!err) {
+					this.updateContext(convo);
+					this.bot.getUser(this.message.user).then((userJSON) => {
+						UserModel.findById(this.message.user).then(userInstance => {
+							if (userInstance !== null) {
+								logger.debug(`User ${userInstance.get('id')} found`);
+							} else {
+								logger.debug(`User ${this.message.user} not found`);
+								UserModel.create(Object.assign(
+									{
+										id: this.message.user,
+									},
+									userJSON
+								))
+									.then(instance => {
+										logger.log(instance.attributes)
+										resolve(instance)
+									})
+									.catch(err => {
+										logger.error(err);
+										reject(err)
+									});
+							}
+
+						}).catch(reject)
+					}).catch(reject);
+					resolve();
+				} else {
+					logger.error(err);
+					reject(err);
+				}
+			})
+		})
+	}
+
+	updateContext(convo) {
 		this.convo = convo;
 	}
 
-    showMainMenu(){
+	showMainMenu() {
 
 		InventoryItem.count().then(count => {
-			this.showSubMeny(1,0,3,count);
+			this.showSubMeny(1, 0, 3, count);
 		})
 
-    }
+	}
 
-    showSubMeny(page, startId, pageSize, count) {
-    	InventoryItem.getPage(startId, pageSize).then(items => {
-			let ids = [],
-				q = new GenericTemplate();
+	showSubMeny(page, startId, pageSize, count) {
+		InventoryItem.getPage(startId, pageSize).then(items => {
+
+			let ids = [];
+			let	q = new GenericTemplate();
+
 			items.forEach(item => {
 				ids.push(item.get('id'));
-				if (item.get('id') == 1) return;
-				if (item.get('id') != 2) {
-					q.addElement(
-						new GenericElement({
-							title: item.get('title'),
-							item_url: "",
-							image_url: item.get('image'),
-							subtitle: item.get('description')
-						}).addButton(new Button({
-							action: item.get('id'),
-							title: 'Buy',
-							type: Button.POSTBACK,
-						}))
-					)
-				} else {
-					q.addElement(
-						new GenericElement({
-							title: item.get('title'),
-							item_url: "",
-							image_url: item.get('image'),
-							subtitle: item.get('description')
-						}).addButton(new Button({
-							action: item.get('id'),
-							title: 'Buy',
-							type: Button.POSTBACK,
-						})).addButton(new Button({
-							action: 1,
-							title: 'With extra chees 12$',
-							type: Button.POSTBACK,
-						}))
-					)
-				}
+				let templateElement = new GenericElement({
+					title: item.get('title'),
+					item_url: "",
+					image_url: item.get('image'),
+					subtitle: item.get('description'),
+				}).addButton(new Button({
+					action: item.get('id'),
+					title: 'Buy',
+					type: Button.POSTBACK,
+				}));
+				q.addElement(templateElement);
+
+				item.getProductVariants().forEach(variant => {
+					templateElement.addButton(new Button({
+						action: variant.get('id'),
+						title: `${variant.get('title')} ${variant.get('price')}$`,
+						type: Button.POSTBACK,
+					}))
+				})
+
+
 			});
-			if (page * pageSize < count ) {
+
+			if (page * pageSize < count) {
 				q.addElement(
 					new GenericElement({
 						title: 'More Options',
@@ -105,6 +131,8 @@ class Menu {
 				);
 			}
 
+			ConversationLogger.saveLog('Start convo', `Show product page ${page}`, this.message.user);
+
 			this.convo.ask(
 				new Attachment(Attachment.TEMPLATE)
 					.addPayload(q).getJSON(),
@@ -112,10 +140,10 @@ class Menu {
 					this.updateContext(convo);
 					if (ids.indexOf(parseInt(response.text)) >= 0) {
 						this.checkOut(items.find(item => {
-							return item.get('id') == parseInt(response.text);
+							return item.get('id') === parseInt(response.text);
 						}));
 						this.convo.next();
-					} else if ('MORE' == response.text) {
+					} else if (response.text === 'MORE') {
 						this.showSubMeny(page + 1, items[items.length - 1].get('id'), pageSize, count);
 						this.convo.next();
 					} else {
@@ -127,7 +155,6 @@ class Menu {
 			)
 
 		})
-
 
 
 	}
@@ -143,53 +170,68 @@ class Menu {
 		// 		this.convo.next();
 		// 	// })
 		// })
+
 	}
 
 	askSeat(inventoryItem) {
 		return new Promise((resolve, reject) => {
 			this.controller.storage.users.get(this.message.user, (err, user) => {
-				console.log(user);
-				if (user && user.get('data') && user.get('data').seat_address) {
-					console.log(user.get('data'));
-					let seat_address = user.get('data').seat_address;
-					this.order.setSeatAddress(seat_address);
+				if (user && user.get('data') && user.get('data').seatAddress) {
+					let seatAddress = user.get('data').seatAddress;
+					this.order.setSeatAddress(seatAddress);
 					this.order.addItem(inventoryItem);
 					this.finishOrderStep1();
 					this.convo.next();
-					resolve(seat_address);
+					resolve(seatAddress);
 				} else {
-					let seat_address = '';
-					this.convo.ask('Section Number:', (response, convo) => {
-						seat_address += `section: ${response.text}; `;
+					let seatAddress = '';
+					this.convo.ask({
+						text: 'Section Number:',
+						quick_replies: new QuickReplies()
+							.addVariant({
+								title: '1',
+								payload: '1',
+							})
+							.addVariant({
+								title: '2',
+								payload: '2',
+							})
+							.addVariant({
+								title: '3',
+								payload: '3',
+							})
+							.getJSON(),
+					}, (response, convo) => {
+						seatAddress += `section: ${response.text}; `;
 						this.updateContext(convo);
-						this.convo.ask('Seat Number:', (response, convo) => {
-							seat_address += `seat: ${response.text}; `;
-							this.updateContext(convo);
-							this.convo.ask('Row Number:', (response, convo) => {
-								seat_address += `row: ${response.text}; `;
-								this.updateContext(convo);
+						this.convo.ask('Seat Number:', (response1, convo1) => {
+							seatAddress += `seat: ${response1.text}; `;
+							this.updateContext(convo1);
+							this.convo.ask('Row Number:', (response2, convo2) => {
+								seatAddress += `row: ${response2.text}; `;
+								this.updateContext(convo2);
 								this.controller.storage.users.save(
 									{
 										id: this.message.user,
-										seat_address
+										seatAddress,
 									},
-									(err, id) => {
-										if (err) {
-											logger.error('Error saving user', err);
+									(error) => {
+										if (error) {
+											logger.error('Error saving user', error);
 											this.convo.stop();
-											reject(err);
+											reject(error);
 										} else {
-											this.order.setSeatAddress(seat_address);
+											this.order.setSeatAddress(seatAddress);
 											this.order.addItem(inventoryItem);
 											this.finishOrderStep1();
 											this.convo.next();
-											resolve(seat_address);
+											resolve(seatAddress);
 										}
 									}
 								);
-							})
+							});
 							this.convo.next();
-						})
+						});
 						this.convo.next();
 					})
 				}
@@ -202,7 +244,7 @@ class Menu {
 		const ACTIONS = {
 			CHECKOUT: 'CHECKOUT',
 			CONTINUE: 'CONTINUE',
-		}
+		};
 
 		this.convo.ask(
 			new Attachment(Attachment.TEMPLATE)
@@ -229,7 +271,7 @@ class Menu {
 							this.finishOrderStep2();
 							this.convo.next();
 						})
-					}
+					},
 				},
 				{
 					pattern: ACTIONS.CONTINUE,
@@ -237,7 +279,7 @@ class Menu {
 						this.updateContext(convo);
 						this.showMainMenu();
 						this.convo.next();
-					}
+					},
 				},
 				{
 					default: true,
@@ -245,10 +287,9 @@ class Menu {
 						this.updateContext(convo);
 						this.convo.repeat();
 						this.convo.next();
-					}
+					},
 				},
 			]
-
 		);
 
 	}
@@ -257,63 +298,59 @@ class Menu {
 		const ACTIONS = {
 			CONFIRM: 'CONFIRM',
 			CANSCEL: 'CANCEL',
-		}
+		};
 
-		let orderTemplate = new Attachment(Attachment.TEMPLATE)
+		this.convo.say(new Attachment(Attachment.TEMPLATE)
 			.addPayload(
-				new GenericTemplate()
-					.addElement(
-						new GenericElement({
-							title: 'Order summary:',
-							item_url: '',
-							image_url: '',
-							subtitle: this.order.getOrderText()
+				this.order.getOrderTemplate()
+			).getJSON());
+
+		this.convo.ask(
+			new Attachment(Attachment.TEMPLATE)
+				.addPayload(
+					new ButtonsTemplate("Order action?")
+						.addButton(new Button({
+							action: ACTIONS.CONFIRM,
+							title: 'Confirm',
+							type: Button.POSTBACK,
+						}))
+						.addButton(new Button({
+							action: ACTIONS.CANSCEL,
+							title: 'Cancel',
+							type: Button.POSTBACK,
+						}))
+				).getJSON(),
+			[
+				{
+					pattern: ACTIONS.CONFIRM,
+					callback: (response, convo) => {
+						this.updateContext(convo);
+						this.order.setStatus(Order.FINISHED);
+						this.order.save().then(() => {
+							this.order = null;
+							this.convo.stop();
+							this.start();
 						})
-							.addButton(new Button({
-								action: ACTIONS.CONFIRM,
-								title: 'Confirm',
-								type: Button.POSTBACK,
-							}))
-							.addButton(new Button({
-								action: ACTIONS.CANSCEL,
-								title: 'Cancel',
-								type: Button.POSTBACK,
-							}))
-					)
-			);
-
-
-		this.convo.ask(orderTemplate.getJSON(), [
-			{
-				pattern: ACTIONS.CONFIRM,
-				callback: (response, convo) => {
-					this.updateContext(convo);
-
-					this.order.setStatus(Order.FINISHED);
-					this.order.save().then(() => {
-						this.order = null;
-						this.convo.stop();
-						this.start();
-					})
-				}
-			},
-			{
-				pattern: ACTIONS.CANSCEL,
-				callback: (response, convo) => {
-					this.updateContext(convo);
-					this.showMainMenu();
-					this.convo.next();
-				}
-			},
-			{
-				default: true,
-				callback: (response, convo) => {
-					this.updateContext(convo);
-					this.convo.repeat();
-					this.convo.next();
-				}
-			},
-		])
+					},
+				},
+				{
+					pattern: ACTIONS.CANSCEL,
+					callback: (response, convo) => {
+						this.updateContext(convo);
+						this.showMainMenu();
+						this.convo.next();
+					},
+				},
+				{
+					default: true,
+					callback: (response, convo) => {
+						this.updateContext(convo);
+						this.convo.repeat();
+						this.convo.next();
+					},
+				},
+			]
+		);
 	}
 
 }
