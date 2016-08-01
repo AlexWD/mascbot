@@ -1,6 +1,7 @@
 'use strict';
 
 const Log = require('../models/models').Log;
+const Conversation = require('../models/models').Conversation;
 
 class ConversationLogger {
 
@@ -18,7 +19,7 @@ class ConversationLogger {
 	}
 
 	static saveConv(convoId, userId) {
-		Log.create({
+		Conversation.create({
 			UserId: userId,
 			id: convoId,
 		})
