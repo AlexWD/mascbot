@@ -39,5 +39,5 @@ module.exports.Log = Log;
 module.exports.User = User;
 module.exports.Conversation = Conversation;
 
-module.exports.Models = [InventoryItem, Order, OrderItem, User, Log, Conversation];
+module.exports.Models = [InventoryItem, Order, OrderItem, User, Conversation, Log];
 
