@@ -4,7 +4,7 @@
 const Facebookbot = require('./botapi/Facebook');
 const config = require('./config');
 const logger = require('./logger');
-const Menu = require('./menu');
+const Conversation = require('./conversation');
 const db = require('./db');
 const BotStorage = require('./botapi/postgres_storage');
 const PersistentMenu = require('./botapi/persistent_menu');
@@ -41,7 +41,7 @@ BotStorage({
 		}, (bot, message) => {
 			if (!menu || !menu.convo.isActive()) {
 				console.log('persistentMenu create menu');
-				menu = new Menu(bot, message, controller);
+				menu = new Conversation(bot, message, controller);
 			} else {
 				console.log('persistentMenu  showMainMenu');
 				menu.showMainMenu();
@@ -60,7 +60,7 @@ BotStorage({
 		if (!menu || !menu.convo.isActive()) {
 			console.log(message);
 			// console.log('GET IMAGE', message.attachments, message.attachments.payload);
-			menu = new Menu(bot, message, controller);
+			menu = new Conversation(bot, message, controller);
 		}
 	});
 

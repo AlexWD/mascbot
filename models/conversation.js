@@ -2,29 +2,14 @@
 
 const db = require('../db');
 
-const modelName = 'Log';
+const modelName = 'Conversation';
 
 let Model = db.sequelize.define(modelName, {
 
 	id: {
-		type: db.Sequelize.INTEGER,
+		type: db.Sequelize.STRING,
 		primaryKey: true,
 		autoIncrement: true,
-	},
-
-	request: {
-		type: db.Sequelize.TEXT,
-		allowNull: true,
-	},
-
-	reply: {
-		type: db.Sequelize.TEXT,
-		allowNull: true,
-	},
-
-	convoid: {
-		type: db.Sequelize.STRING,
-		allowNull: true,
 	},
 
 }, {
