@@ -46,7 +46,8 @@ function createPrivateSlackChannel(opts) {
 
             // If the channel doesn't exist
             if (!channelExists.answer) {
-              // create it
+
+              // Create channel
               return rp(routeOptions.createPrivateChannelOptions(opts))
             }
 
@@ -68,11 +69,19 @@ function inviteUserToChannel(opts) {
 
             // Only invite the user if they are not already in the channel
             if (channelUsers.indexOf(opts.user) === -1) {
+
               return rp(routeOptions.inviteUserOptions(opts));
-            }
+            } 
           })
           .catch((err) => {
-            console.log('Error inviting bot', err.message);
+            console.log('Error inviting User', err.message);
+          })
+}
+
+function removeBotUser(opts) {
+  return rp(routeOptions.removeBotUserOptions(opts))
+          .catch((err) => {
+            console.log('Error kicking bot user', err.message);
           })
 }
 

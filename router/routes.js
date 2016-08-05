@@ -50,11 +50,14 @@ module.exports = (app) => {
 
 		// **********************************
 		// Testing
+		// section_id || row_id || seat_id most be changed everytime 
+		// given that we are using those value to determine slack channel name
+		// slack error's if you try to create the same channel
 
 		let rd = {
 			section_id: 119,
 			row_id: 16,
-			seat_id: 52,
+			seat_id: 55,
 			order_id: 1,
 			order_item_id: 1,
 			order_details: 'Coke x 1, Hotdog x 2',
@@ -73,10 +76,10 @@ module.exports = (app) => {
 			stadium: 'Avaya'
 		};
 
-		Order.findOrCreate({ where: orderOpts})
-		.catch((err) => {
-			console.log('Error creating order:', err.message);
-		});
+		// Order.findOrCreate({ where: orderOpts})
+		// .catch((err) => {
+		// 	console.log('Error creating order:', err.message);
+		// });
 
 		// **********************************
 
@@ -125,7 +128,8 @@ module.exports = (app) => {
 				// invite bot user into the newly created channel
 				opts.invite_bot_data = {
 					channel: opts.channel_id,
-					user: bot.slack_id
+					user: bot.slack_id,
+					bot: true
 				};
 
 				helperFunctions.inviteUserToChannel(opts.invite_bot_data)
@@ -137,8 +141,8 @@ module.exports = (app) => {
 
 					var messageOptions = {
 						command: '/display_order_details',
-						channel_id: opts.channel_id,
 						text: message,
+						channel_id: opts.channel_id,
 						source_id: rd.source_id,
 						source_name: rd.source_name, 
 						order: {

@@ -157,15 +157,12 @@ module.exports = (server) => {
 				  let channel = channelStore[message.channel];
 
 				  if (message.command === '/display_order_details' && message.origin === 'server') {
+				  console.log('display_order_details:', message)
 
-				    // Save source id/name to channel;
+				    // Save order details to channel;
 				    channel.source_id = message.source_id;
 				    channel.source_name = message.source_name;
-
-				    // Save runner to channel
 				    channel.runner = message.order.runner;
-
-				    // Save order details to channel
 				    channel.order = message.order;
 
 				    let orderMessage = {

@@ -95,6 +95,19 @@ module.exports = {
   	}
 	},
 
+  removeBotUserOptions: function(opts) {
+    return {
+      method: 'POST',
+      uri: 'https://slack.com/api/groups.kick',
+      qs: {
+        token: config.slack['test-token'],
+        channel: opts.channel,
+        user: opts.user
+      },
+      json: true
+    }
+  },
+
 	sendFBBotOptions: function(opts) {
 		var date = new Date();
 
