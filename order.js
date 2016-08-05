@@ -8,16 +8,18 @@ const ReceiptElement = require('./botapi/structure_content/receipt_element');
 
 class Order {
 
-	// {
+	// obj {
 	// 	seat_address: seat_address,
 	// 	status: Order.NEW,
 	// 	stadium: 'stadium 1',
 	// 	phone: response.text,
 	// 	game: 'game 1',
 	// }
-	constructor(obj) {
+	// user
+	constructor(obj, user) {
 		this.order = OrderModel.build(obj);
 		this.items = {};
+		this.user = user;
 	}
 
 	save() {

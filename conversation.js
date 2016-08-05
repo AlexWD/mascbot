@@ -19,15 +19,7 @@ class Menu {
 		this.bot = bot;
 		this.message = message;
 		this.controller = controller;
-		this.order = new Order(
-			{
-				seat_address: '',
-				status: Order.NEW,
-				stadium: 'stadium 1',
-				phone: '',
-				game: 'game 1',
-			}
-		);
+		this.order = null;
 		this.convo = null;
 		this.user = null;
 
@@ -36,6 +28,16 @@ class Menu {
 
 	start() {
 		this.startConversation().then((user) => {
+			this.order = new Order(
+				{
+					seat_address: '',
+					status: Order.NEW,
+					stadium: 'stadium 1',
+					phone: '',
+					game: 'game 1',
+				},
+				user
+			);
 			this.showMainMenu();
 		})
 	}
