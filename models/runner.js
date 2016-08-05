@@ -32,25 +32,20 @@ let Model = db.sequelize.define('Runners', {
 		defaultValue: ""
 	},
 
-	slack_id: {
-		type: db.Sequelize.STRING,
-		allowNull: false,
-		defaultValue: ""
-	},
-
 	section_id: {
 		type: db.Sequelize.INTEGER,
 		defaultValue: 0
 	},
 	
-	team: {
+	slack_id: {
+		type: db.Sequelize.STRING,
+		allowNull: false,
+		defaultValue: ""
+	},
+	
+	team_id: {
 		type: db.Sequelize.INTEGER,
 		defaultValue: 0
-	},
-
-	slack_channel_ids: {
-		type: db.Sequelize.ARRAY(db.Sequelize.STRING),
-		defaultValue: []
 	}
 
 }, {

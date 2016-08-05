@@ -29,7 +29,13 @@ let Model = db.sequelize.define('Order', {
 	},
 
 	status: {
-		type: db.Sequelize.ENUM('EMPTY', 'NEW', 'FINISHED'),
+		type: db.Sequelize.ENUM('EMPTY', 'NEW', 'FINISHED')
+	},
+
+	order_status: {
+		type: db.Sequelize.STRING,
+		allowNull: false,
+		defaultValue: ""
 	},
 
 	stadium: {

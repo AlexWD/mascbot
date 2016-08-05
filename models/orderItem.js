@@ -20,12 +20,7 @@ let Model = db.sequelize.define('OrderItems', {
 		type: db.Sequelize.DECIMAL(10, 2),
 		allowNull: false,
 		defaultValue: 0.0
-	},
-
-	order_association_id: {
-		type: db.Sequelize.INTEGER,
-		defaultValue: null
-	},
+	}
 
 }, {
 	tableName: 'order_items',

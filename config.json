@@ -22,7 +22,7 @@
   "facebook" : {
     "debug": true,
     "port": 5777,
-    "page_token": "EAAIlOUmxAmQBAEyoqQwKuYbhxOa4REEUL4UoNPaILodIBOMLEBqiGps5dIWcDrZAQtiIsocuB6vpolN3W64hHbJQJu00ZC0kjfZBgLou4zuX1NZBd9qE07ReG3s4HOlnS2ZAsv1Gixpg3GETxaa3uE0hgKHHYEIjCwikbZCGTEpgZDZD",
+    "page_token": "EAAIlOUmxAmQBAJLqIW26QZCWntFP7gXrTRN4RXTBZBgkViEG52qq4OAxiRRgtdxeQEjw2RfHvU4nqq3nJUtraZBkT6TPjZCysQCDghg8vWWQlJnkGbqiCZAyL4z8Jv3XpRvNhMEaLXqsW7CZALxUBkLjW27tZCyQATqviOesbcWZAQZDZD",
     "verify_token": "testing_one_two_testing",
     "test-secret": "4e4c32ec0982325a7889b23c947a60b8"
   },
@@ -32,6 +32,8 @@
     "test-client-id": "43801518769.62927724245",
     "test-secret": "febe465b1c1720cc804bedbb0132e006",
     "redirect-uri": "https://3e67a900.ngrok.io/oauth",
-    "bot-name": "Runner bot"
+    "bot-name": "Runner bot",
+    "bot-id": "U1UTREBB7",
+    "team-id": "T19PKF8NM" 
   }
 }

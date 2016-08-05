@@ -1,9 +1,7 @@
 'use strict';
 let server = require('./server.js');
 
-// let facebookBot = require('./bots/facebook_bot.js')({server: server, emitter: slackemitter}).start_bot();
-let facebookBot = require('./bots/facebook_bot.js');
-let slackBot = require('./bots/slack_bot.js')(server);
+require('./bots/slack_bot.js')(server).start_bot();
+require('./bots/facebook_bot.js')(server).start_bot();
 
-slackBot.start_bot();
-facebookBot.start_bot(server);
+// require('./twilio_bot.js')(server).start_bot();

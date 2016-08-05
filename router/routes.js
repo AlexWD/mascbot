@@ -7,6 +7,8 @@ let OrderItem = require('../models/orderItem.js');
 let Order = require('../models/order.js');
 let Runner = require('../models/runner.js');
 let config = require('../config.js');
+let messages = require('../utils/messages/messages.js');
+let date = new Date();
 
 module.exports = (app) => {
 
@@ -37,59 +39,86 @@ module.exports = (app) => {
 				row_id: '',
 				seat_id: '',
 				order_id: '',
-				order_item_id: ''
+				order_item_id: '',
+				order_details: '',
+				source_id: '',
+				source_name: ''
 			}
 			*/
 
 		// let rd = req.body;
 
+		// **********************************
+		// Testing
+
 		let rd = {
-			section_id: 118,
+			section_id: 119,
 			row_id: 16,
-			seat_id: 7,
+			seat_id: 52,
 			order_id: 1,
-			order_item_id: 1
-		}
+			order_item_id: 1,
+			order_details: 'Coke x 1, Hotdog x 2',
+			source_id: '1021852287930220', // facebook_channel_id or twilio number
+			source_name: 'facebook'
+		};
+
+		// create Order in db
+
+		let orderOpts = {
+			id: 1,
+			game: 'MLS v. Arsenal',
+			phone: '8056371990',
+			seat_address: 'section:118,row:16,seat:9',
+			order_status: 'NEW',
+			stadium: 'Avaya'
+		};
+
+		Order.findOrCreate({ where: orderOpts})
+		.catch((err) => {
+			console.log('Error creating order:', err.message);
+		});
+
+		// **********************************
+
+		// save in database some how
 		let opts = {};
 	
 		// ********
-		// for this end point to work 
+		// For this end point to work 
 		// each runner must be associated with a section id
 		// *********
 
 		// Runner.find({ where: { section_id: rd.section_id} })
 
-		Runner.find({ where: { first_name: 'Abhi'} })
+		Runner.find({ where: { section_id: 9} })
 		.then((runner) => {
 			opts.runner_data = {
 				name: runner.first_name,
 				slack_id: runner.slack_id,
-				section_id: rd.section_id,
-				row_id: rd.row_id,
-				seat_id: rd.seat_id,
-				order_id: `${rd.order_id}-${rd.order_item_id}`
+				channel_name: `s${rd.section_id}r${rd.row_id}s${rd.seat_id}`
 			}
-			// create private slack channel
+
 			return helperFunctions.createPrivateSlackChannel(opts.runner_data);
 		})
-		.then((slackChannel) => {
-			// invite the runner into the newly created channel
+		.then((channel) => {
 
-			opts.channel_id = slackChannel.group.id
+			// Save the channel id to our opts store
+			opts.channel_id = channel.group.id;
+
 			opts.invite_runner_data = {
 				channel: opts.channel_id,
 				user: opts.runner_data.slack_id
 			};
-			helperFunctions.inviteUserToChannel(opts.invite_runner_data);
+
+			// invite the runner into the newly created channel
+			return helperFunctions.inviteUserToChannel(opts.invite_runner_data);
 
 		})
 		.then(() => {
-			// find the slack id of our bot user
-			// every slack user (bot user  included) in our slack team 
-			// will be saved as a runner in the DB
 
-			// we can also use botkit to identify the bot id and name
-			// instead of making a find request to our db;
+			// Find the slack id of our bot user
+			// Every slack user (bot user  included) in our slack team 
+			// Will be saved as a runner in the DB
 
 			Runner.find({ where: { first_name: config.slack['bot-name']}})
 			.then((bot) => {
@@ -99,14 +128,38 @@ module.exports = (app) => {
 					user: bot.slack_id
 				};
 
-				helperFunctions.inviteUserToChannel(opts.invite_bot_data);
+				helperFunctions.inviteUserToChannel(opts.invite_bot_data)
+				.then(() => {
 
+					// Send message after bot has been created
+					// In order for the bot to listen to the message
+					var message = messages.sendSlackOrderDetails(rd);
+
+					var messageOptions = {
+						command: '/display_order_details',
+						channel_id: opts.channel_id,
+						text: message,
+						source_id: rd.source_id,
+						source_name: rd.source_name, 
+						order: {
+							runner: opts.runner_data.name,
+							order_id: rd.order_id
+						},
+						origin: 'server'
+					}
+
+					// Send order detail payload to slack channel
+					helperFunctions.sendSlackMessage(messageOptions)
+
+				})
 			});
-
+		})
+		.then(() => {
 			res.sendStatus(200);
+
 		})
 		.catch((err) => {
-		  console.log(err)
+		  console.log('Error preparing slack channel', err.message)
 			res.sendStatus(500);
 		})
 	});
