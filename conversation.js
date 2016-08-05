@@ -315,7 +315,7 @@ class Menu {
 								type: Button.POSTBACK,
 							}))
 							.addButton(new Button({
-								action: ACTIONS.YES,
+								action: ACTIONS.NO,
 								title: 'No',
 								type: Button.POSTBACK,
 							}))
