@@ -31,7 +31,7 @@
     "verify-token": "2lIFISndLf95COYtmU6vMquC",
     "test-client-id": "43801518769.62927724245",
     "test-secret": "febe465b1c1720cc804bedbb0132e006",
-    "redirect-uri": "https://3e67a900.ngrok.io/oauth",
+    "redirect-uri": "https://runner-bot.herokuapp.com/oauth",
     "bot-name": "Runner bot",
     "bot-id": "U1UTREBB7",
     "team-id": "T19PKF8NM" 
