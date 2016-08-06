@@ -232,9 +232,6 @@ function Facebookbot(configuration) {
     });
 
     webserver.get('/facebook/receive', (req, res) => {
-      console.log(req.body)
-      console.log(req.query['hub.mode'])
-      console.log(req.query['hub.verify_token'] === configuration.verify_token)
       if (req.query['hub.mode'] === 'subscribe') {
         if (req.query['hub.verify_token'] === configuration.verify_token) {
           res.send(req.query['hub.challenge']);
