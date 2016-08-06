@@ -55,9 +55,9 @@ module.exports = (app) => {
 		// slack error's if you try to create the same channel
 
 		let rd = {
-			section_id: 119,
-			row_id: 16,
-			seat_id: 55,
+			section_id: 121,
+			row_id: 10,
+			seat_id: 1,
 			order_id: 1,
 			order_item_id: 1,
 			order_details: 'Coke x 1, Hotdog x 2',
@@ -93,7 +93,8 @@ module.exports = (app) => {
 
 		// Runner.find({ where: { section_id: rd.section_id} })
 
-		Runner.find({ where: { section_id: 9} })
+		// Runner.find({ where: { section_id: 9} })
+    Runner.find({ where: { first_name: 'Abhi'} })
 		.then((runner) => {
 			opts.runner_data = {
 				name: runner.first_name,

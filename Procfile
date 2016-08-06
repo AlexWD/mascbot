@@ -1,1 +1,1 @@
-web: node utils/create_db.js && node facebook_bot.js
+web: node utils/create_db.js && node start_bots.js
