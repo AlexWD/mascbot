@@ -32,9 +32,9 @@ class Menu {
 				{
 					seat_address: '',
 					status: Order.NEW,
-					stadium: 'stadium 1',
-					phone: '',
-					game: 'game 1',
+					stadium: 'Avaya Stadium',
+					phone: `${this.user.get('id')}`,
+					game: 'SJ vs NYCFC',
 				},
 				user
 			);
@@ -118,7 +118,7 @@ class Menu {
 					subtitle: item.get('description'),
 				}).addButton(new Button({
 					action: item.get('id'),
-					title: 'Buy',
+					title: `Buy ${item.get('price')}$`,
 					type: Button.POSTBACK,
 				}));
 				q.addElement(templateElement);
@@ -260,7 +260,7 @@ class Menu {
 						this.convo.next();
 					})*/
 
-					this.convo.ask('Enter your seat number:', (response, convo) => {
+					this.convo.ask('Ok, I love this selection. What is your section/row/seat number 💺:', (response, convo) => {
 						let seatAddress = response.text;
 						this.updateContext(convo);
 
@@ -276,14 +276,14 @@ class Menu {
 									reject(error);
 								} else {
 									ConversationLogger.saveMessage(
-										'Enter your seat number:',
+										'Please enter your section/row/seat number 💺:',
 										seatAddress,
 										this.convo.provateId,
 										this.message.user);
 
 									this.order.setSeatAddress(seatAddress);
 									this.order.addItem(inventoryItem);
-									this.requestUserPhoto();
+									//this.requestUserPhoto();
 									this.convo.next();
 									resolve(seatAddress);
 								}
@@ -371,7 +371,7 @@ class Menu {
 		this.convo.ask(
 			new Attachment(Attachment.TEMPLATE)
 				.addPayload(
-					new ButtonsTemplate("Your order is being processed..")
+					new ButtonsTemplate("Your order is being processed ⌛..")
 						.addButton(new Button({
 							action: ACTIONS.CHECKOUT,
 							title: 'Checkout',
@@ -417,7 +417,7 @@ class Menu {
 					default: true,
 					callback: (response, convo) => {
 						ConversationLogger.saveMessage(
-							'Checout question',
+							'Checkout question',
 							response.text,
 							this.convo.provateId,
 							this.message.user);
@@ -445,15 +445,15 @@ class Menu {
 		this.convo.ask(
 			new Attachment(Attachment.TEMPLATE)
 				.addPayload(
-					new ButtonsTemplate("Order action?")
+					new ButtonsTemplate("Please confirm your order for delivery 🏃..")
 						.addButton(new Button({
 							action: ACTIONS.CONFIRM,
-							title: 'Confirm',
+							title: 'Confirm 👍',
 							type: Button.POSTBACK,
 						}))
 						.addButton(new Button({
 							action: ACTIONS.CANSCEL,
-							title: 'Cancel',
+							title: 'Cancel ❌',
 							type: Button.POSTBACK,
 						}))
 				).getJSON(),
@@ -461,6 +461,18 @@ class Menu {
 				{
 					pattern: ACTIONS.CONFIRM,
 					callback: (response, convo) => {
+						// var msg = {
+					 //      "attachment": {
+					 //        "type": "image",
+					 //        "payload": {
+					 //          "url": 'http://gph.is/1T1xrKT'
+					 //        }
+					 //      }
+					 //    };
+
+						// this.convo.say(msg);
+						this.convo.say(' 👌');
+          				this.convo.next();
 						ConversationLogger.saveMessage(
 							'Order confirmation',
 							response.text,
@@ -470,9 +482,10 @@ class Menu {
 						this.order.setStatus(Order.FINISHED);
 						this.order.save().then(() => {
 							this.order = null;
-							this.convo.stop();
+							//this.convo.stop();
 							this.start();
 						})
+						
 					},
 				},
 				{
