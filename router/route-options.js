@@ -78,7 +78,7 @@ module.exports = {
 	sendSlackMessageOptions: function(opts) {
 	  return {
 	  	method: 'POST',
-  	  uri: 'https://3e67a900.ngrok.io/slack/receive',
+  	  uri: 'https://runner-bot.herokuapp.com/slack/receive',
   	  body: {
   	  	command: opts.command,
   	  	team_id: config.slack['team-id'],
@@ -113,7 +113,7 @@ module.exports = {
 
 		return {
 			method: 'POST',
-			uri: 'https://3e67a900.ngrok.io/facebook/receive',
+			uri: 'https://runner-bot.herokuapp.com/facebook/receive',
 			body: {
 				entry: [{	
 					messaging: [{
@@ -135,7 +135,7 @@ module.exports = {
 	sendSlackBotOptions: function(opts) {
 	  return {
 	  	method: 'POST',
-  	  uri: 'https://3e67a900.ngrok.io/slack/receive',
+  	  uri: 'https://runner-bot.herokuapp.com/slack/receive',
   	  body: {
   	  	trigger_word: true,
   	  	team_id: config.slack['team-id'],
