@@ -19,16 +19,6 @@ module.exports = (app) => {
 			// redirect them to UI that shows their daily orders;
 	// });
 
-  app.get('/facebook/receive', (req, res) => {
-    if (req.query['hub.mode'] === 'subscribe') {
-      if (req.query['hub.verify_token'] === config.facebook.page_token) {
-        res.send(req.query['hub.challenge']);
-      } else {
-        res.send('OK');
-      }
-    }
-  });
-
 	app.post('/create/runners/db', (req, res) => {
 		helperFunctions.createAllRunners()
 		.then(() => {

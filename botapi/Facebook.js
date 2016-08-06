@@ -232,9 +232,11 @@ function Facebookbot(configuration) {
     });
 
     webserver.get('/facebook/receive', (req, res) => {
+      console.log(req.hub)
+      console.log(req.query['hub.mode'])
+      console.log(req.query['hub.verify_token'] === configuration.verify_token)
       if (req.query['hub.mode'] === 'subscribe') {
-        facebookBotkit.log(req.query['hub.verify_token'] === configuration.verify_token)
-        if (req.query['hub.verify_token'] === config.facebook.verify_token) {
+        if (req.query['hub.verify_token'] === configuration.verify_token) {
           res.send(req.query['hub.challenge']);
         } else {
           res.send('OK');
