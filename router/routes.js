@@ -46,7 +46,7 @@ module.exports = (app) => {
 			}
 			*/
 
-		// let rd = req.body;
+		let body = req.body;
 
 		// **********************************
 		// Testing
@@ -55,9 +55,9 @@ module.exports = (app) => {
 		// slack error's if you try to create the same channel
 
 		let rd = {
-			section_id: 121,
-			row_id: 10,
-			seat_id: 1,
+			section_id: body.section_id,
+			row_id: body.row_id,
+			seat_id: body.seat_id,
 			order_id: 1,
 			order_item_id: 1,
 			order_details: 'Coke x 1, Hotdog x 2',
