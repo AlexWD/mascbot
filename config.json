@@ -22,7 +22,7 @@
   "bot" : {
     "debug": false,
     "port": 5777,
-    "page_token": "EAAEXx1to98MBALQPyCUZBnIGXOdaNXkapwyxkkaJCzvxMIv887u5RFYEYJxPgf2wNeElZC47KZASHcZBn8x4IkZC5qFhiRiZCskHx4hM3oZBfXtcfav7QG76TnTnuztBJkZCMLfycZBhKKXENgmSWk6HZBrLOOrIIRv5tiq5ZCAY9y65fdv9ZAZCiNUyF",
+    "page_token": "EAAHeAPBgqJABAG8j0Q6VA5my4V9XzdpJ8Vhb8mdIGFJCSv3yl403Fa25IuQ7QcCm0uzezStR0rMvTvy8VjFHbzTwaUwr4MMkwlFk6HRAtz2ZAqPf013ARp2clj1DCiDJ2yh916d5sRAFadzULLmxYUIEV1d455lEIfVNstgZDZD",
     "verify_token": "testbot"
   }
 }
