@@ -84,7 +84,7 @@ module.exports = (app) => {
 		// **********************************
 		// save in database some how
 		let opts = {};
-	
+	  let opts2 = {};
 		// ********
 		// For this end point to work 
 		// each runner must be associated with a section id
