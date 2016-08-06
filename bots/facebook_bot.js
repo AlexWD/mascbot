@@ -49,12 +49,9 @@ module.exports = (server) => {
         let channelStore = {};
 
         // Insert server into bot
-        controller.setupWebserver((err, webserver) => {
-          controller.createWebhookEndpoints(server, bot, (err, data) => {
-            logger.info('ONLINE!');
-          });
+        controller.createWebhookEndpoints(server, bot, (err, data) => {
+          logger.info('ONLINE!');
         });
-
 
         controller.hears(['(.*)'], 'message_received', (bot, message) => {
           // Promisify botkit api
