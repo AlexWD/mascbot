@@ -43,7 +43,8 @@ module.exports = (server) => {
           verify_token: config.facebook.verify_token,
         });
         let bot = controller.spawn({});
-
+        console.log(controller)
+        logger.info('Work damn you!');
         // Contains details about each order in each channel
         // rewrite to leverage bot storage 
         let channelStore = {};
