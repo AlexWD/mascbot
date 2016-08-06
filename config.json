@@ -22,7 +22,7 @@
   "facebook" : {
     "debug": true,
     "port": 5777,
-    "page_token": "EAAIorNVf9AwBAN1ZAWWwYHWcXYs5B7E8rMBNMQMiskc8uwZAvzOuPR0GwdFPtebRmPZBjU4mcq5FSLosESyZBWO9DnpMBZCwJ1ArjjdMOOZAUhKibU1vGZB1Cow8YBFyjuoxRiR4eisZBsobD0zdDA347DiE924G7vEcsrKbTZAr4xwZDZD",
+    "page_token": "EAAIosGnlPjUBAHaDJTUBSirCmfZBlv92UKMvjermI6H8iybEAixS29I63We3bua117yNZBeepkvi10rQHFT7Hd82zJarZCxYLZCGxlaypxomLCi4k663QwZBvaZBaKW99aZCOMsBAJu9disAlvmZCg8uvvM05KbVwaVQ9JZCvdCXKYgZDZD",
     "verify_token": "testing_one_two_testing",
     "test-secret": "4e4c32ec0982325a7889b23c947a60b8"
   },
