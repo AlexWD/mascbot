@@ -146,6 +146,10 @@ module.exports = (server) => {
 
         });
 
+        controller.on('tick', (bot, message) => {
+
+        });
+
         controller.on('facebook_optin', (bot, message) => {
             bot.reply(message, 'Welcome to my app!');
 

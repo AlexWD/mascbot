@@ -155,7 +155,7 @@ function Facebookbot(configuration) {
 
     facebookBotkit.log(
       `** Serving webhook endpoints for Messenger Platform at: 
-      http://MY_HOST:${facebookBotkit.config.port}/facebook/receive`);
+      http://MY_HOST:${webserver.get('port')}/facebook/receive`);
     webserver.post('/facebook/receive', (req, res) => {
 
       facebookBotkit.debug('GOT A MESSAGE HOOK');
@@ -241,7 +241,7 @@ function Facebookbot(configuration) {
         }
       }
     });
-
+    console.log('configuration.verify_token', configuration.verify_token)
     request.post(`https://graph.facebook.com/me/subscribed_apps?access_token=${configuration.access_token}`,
       (err, res, body) => {
         if (err) {
