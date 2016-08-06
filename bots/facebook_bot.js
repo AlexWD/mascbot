@@ -1,6 +1,6 @@
 'use strict';
 
-const Botkit = require('botkit');
+const FacebookBot = require('botkit');
 const config = require('../config');
 const logger = require('../logger');
 const Menu = require('../menu');
@@ -35,25 +35,28 @@ module.exports = (server) => {
         let menu = null;
 
         // Configure Facebook bot
-        let facebookbot = Botkit.facebookbot({
+        let controller = FacebookBot({
           storage: botStorage,
           debug: config.facebook.debug,
           logLevel: 7,
           access_token: config.facebook.page_token,
           verify_token: config.facebook.verify_token,
         });
-        let spawnedBot = facebookbot.spawn({});
+        let bot = controller.spawn({});
 
         // Contains details about each order in each channel
         // rewrite to leverage bot storage 
         let channelStore = {};
 
         // Insert server into bot
-        facebookbot.createWebhookEndpoints(server, spawnedBot, (err, data) => {
-          logger.info('ONLINE!');
+        controller.setupWebserver((err, webserver) => {
+          controller.createWebhookEndpoints(server, bot, (err, data) => {
+            logger.info('ONLINE!');
+          });
         });
 
-        facebookbot.hears(['(.*)'], 'message_received', (bot, message) => {
+
+        controller.hears(['(.*)'], 'message_received', (bot, message) => {
           // Promisify botkit api
           Promise.promisifyAll(bot);
 
@@ -142,18 +145,18 @@ module.exports = (server) => {
           }
         });
 
-        facebookbot.on('facebook_postback', (bot, message) => {
+        controller.on('facebook_postback', (bot, message) => {
 
         });
 
-        facebookbot.on('facebook_optin', (bot, message) => {
+        controller.on('facebook_optin', (bot, message) => {
             bot.reply(message, 'Welcome to my app!');
 
         });
 
-        facebookbot.on('message_received', (bot, message) => {
+        controller.on('message_received', (bot, message) => {
           if (!menu || !menu.convo.isActive()) {
-            menu = new Menu(bot, message, facebookbot);
+            menu = new Menu(bot, message, controller);
           }
         });
       });
