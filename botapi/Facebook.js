@@ -233,22 +233,21 @@ function Facebookbot(configuration) {
     webserver.get('/facebook/receive', (req, res) => {
       if (req.query['hub.mode'] === 'subscribe') {
         if (req.query['hub.verify_token'] === config.facebook.verify_token) {
+          request.post(`https://graph.facebook.com/me/subscribed_apps?access_token=${configuration.access_token}`,
+            (err, res, body) => {
+              if (err) {
+                facebookBotkit.log('Could not subscribe to page messages');
+              } else {
+                facebookBotkit.debug('Successfully subscribed to Facebook events:', body);
+                facebookBotkit.startTicking();
+              }
+            });
           res.send(req.query['hub.challenge']);
         } else {
           res.send('OK');
         }
       }
     });
-
-    request.post(`https://graph.facebook.com/me/subscribed_apps?access_token=${configuration.access_token}`,
-      (err, res, body) => {
-        if (err) {
-          facebookBotkit.log('Could not subscribe to page messages');
-        } else {
-          facebookBotkit.debug('Successfully subscribed to Facebook events:', body);
-          facebookBotkit.startTicking();
-        }
-      });
 
     if (cb) {
       cb();
