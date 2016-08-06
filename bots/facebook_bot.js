@@ -1,6 +1,6 @@
 'use strict';
 
-const FacebookBot = require('botkit');
+const FacebookBot = require('../botapi/Facebook.js');
 const config = require('../config');
 const logger = require('../logger');
 const Menu = require('../menu');
