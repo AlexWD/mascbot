@@ -232,6 +232,7 @@ function Facebookbot(configuration) {
 
     webserver.get('/facebook/receive', (req, res) => {
       if (req.query['hub.mode'] === 'subscribe') {
+        facebookBotkit.log(req.query['hub.verify_token'] === config.facebook.verify_token)
         if (req.query['hub.verify_token'] === config.facebook.verify_token) {
           request.post(`https://graph.facebook.com/me/subscribed_apps?access_token=${configuration.access_token}`,
             (err, res, body) => {
