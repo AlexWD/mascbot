@@ -195,20 +195,20 @@ class Menu {
 	askSeat(inventoryItem) {
 		return new Promise((resolve, reject) => {
 			this.controller.storage.users.get(this.message.user, (err, user) => {
-				if (user && user.get('data') && user.get('data').seatAddress) {
-					let seatAddress = user.get('data').seatAddress;
-					this.order.setSeatAddress(seatAddress);
-					this.order.addItem(inventoryItem);
-					this.finishOrderStep1();
-					this.convo.next();
-					resolve(seatAddress);
-
-					ConversationLogger.saveMessage(
-						'Enter your seat number:',
-						`From cache: ${seatAddress}`,
-						this.convo.provateId,
-						this.message.user);
-				} else {
+				// if (user && user.get('data') && user.get('data').seatAddress) {
+				// 	let seatAddress = user.get('data').seatAddress;
+				// 	this.order.setSeatAddress(seatAddress);
+				// 	this.order.addItem(inventoryItem);
+				// 	this.finishOrderStep1();
+				// 	this.convo.next();
+				// 	resolve(seatAddress);
+				//
+				// 	ConversationLogger.saveMessage(
+				// 		'Enter your seat number:',
+				// 		`From cache: ${seatAddress}`,
+				// 		this.convo.provateId,
+				// 		this.message.user);
+				// } else {
 					// let seatAddress = '';
 					/*this.convo.ask({
 						text: 'Section Number:',
@@ -292,7 +292,7 @@ class Menu {
 					});
 					this.convo.next();
 
-				}
+				// }
 			})
 
 		})
