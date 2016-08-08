@@ -17,12 +17,12 @@
   },
   "database": {
     "logging": false,
-    "url":"postgresql://test:test@localhost:5495/test_facebook"
+    "url":"postgres://skinxpibhordqn:TBDKBqnag8T7rVaP3IVTZLisoW@ec2-54-83-22-233.compute-1.amazonaws.com:5432/d62kg66s2kofo2"
   },
   "bot" : {
     "debug": false,
     "port": 5777,
-    "page_token": "EAAEXx1to98MBALQPyCUZBnIGXOdaNXkapwyxkkaJCzvxMIv887u5RFYEYJxPgf2wNeElZC47KZASHcZBn8x4IkZC5qFhiRiZCskHx4hM3oZBfXtcfav7QG76TnTnuztBJkZCMLfycZBhKKXENgmSWk6HZBrLOOrIIRv5tiq5ZCAY9y65fdv9ZAZCiNUyF",
+    "page_token": "EAAHeAPBgqJABAG8j0Q6VA5my4V9XzdpJ8Vhb8mdIGFJCSv3yl403Fa25IuQ7QcCm0uzezStR0rMvTvy8VjFHbzTwaUwr4MMkwlFk6HRAtz2ZAqPf013ARp2clj1DCiDJ2yh916d5sRAFadzULLmxYUIEV1d455lEIfVNstgZDZD",
     "verify_token": "testbot"
   }
 }
