@@ -5,24 +5,24 @@ const config = require('./config');
 const logger = require('./logger');
 
 // ORM connection settings
-// const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
-// 	define: {
-// 		charset: 'utf8',
-// 		collate: 'utf8_general_ci',
-// 	},
-// });
-
-var match = config.database.url.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
-const sequelize = new Sequelize(match[5], match[1], match[2], {
-    dialect:  'postgres',
-    protocol: 'postgres',
-    port:     match[4],
-    host:     match[3],
-    logging: false,
-    dialectOptions: {
-        ssl: true
-    }
+const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
+	define: {
+		charset: 'utf8',
+		collate: 'utf8_general_ci',
+	},
 });
+
+// var match = config.database.url.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+// const sequelize = new Sequelize(match[5], match[1], match[2], {
+//     dialect:  'postgres',
+//     protocol: 'postgres',
+//     port:     match[4],
+//     host:     match[3],
+//     logging: false,
+//     dialectOptions: {
+//         ssl: true
+//     }
+// });
 
 /**
  * Connects to PostgreSQL showing an error if failing.
