@@ -16,7 +16,7 @@
     }
   },
   "database": {
-    "logging": false,
+    "logging": true,
     "url":"postgres://skinxpibhordqn:TBDKBqnag8T7rVaP3IVTZLisoW@ec2-54-83-22-233.compute-1.amazonaws.com:5432/d62kg66s2kofo2"
   },
   "bot" : {
