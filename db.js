@@ -4,8 +4,11 @@ const Sequelize = require('sequelize');
 const config = require('./config');
 const logger = require('./logger');
 
+console.log('dattabase', process.env.DATABASE_URL);
+console.log('dattabase', config.database.url);
 // ORM connection settings
 const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
+	logging: config.database.logging,
 	define: {
 		charset: 'utf8',
 		collate: 'utf8_general_ci',
