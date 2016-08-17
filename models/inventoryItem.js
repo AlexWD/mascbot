@@ -127,6 +127,7 @@ let Model = db.sequelize.define(modelName, {
 				if (itemsCache.get(modelName)) {
 					console.log('InventoryItem', '__getAllItems resolve itemsCache.get(modelName)', itemsCache.get(modelName) );
 					resolve(itemsCache.get(modelName));
+					return;
 				}
 				Model.findAll({
 					order: 'id',
