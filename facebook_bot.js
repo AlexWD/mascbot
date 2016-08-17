@@ -20,8 +20,8 @@ BotStorage({
 		storage: botStorage,
 		debug: config.bot.debug,
 		logLevel: 7,
-		access_token: config.bot.page_token,
-		verify_token: config.bot.verify_token,
+		access_token: process.env.page_token || config.bot.page_token,
+		verify_token: process.env.verify_token || config.bot.verify_token,
 	});
 
 	const bot = controller.spawn({});
