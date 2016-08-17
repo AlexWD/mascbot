@@ -125,6 +125,7 @@ let Model = db.sequelize.define(modelName, {
 		__getAllItems() {
 			return new Promise((resolve, reject) => {
 				if (itemsCache.get(modelName)) {
+					console.log('InventoryItem', '__getAllItems resolve itemsCache.get(modelName)', itemsCache.get(modelName) );
 					resolve(itemsCache.get(modelName));
 				}
 				Model.findAll({
@@ -143,6 +144,7 @@ let Model = db.sequelize.define(modelName, {
 									.then((complexProductRelation) => {
 										itemsCache.set('complexProductRelation', complexProductRelation);
 										logger.info(`Cached ${variantsRelation.length} complexRelations`);
+										console.log('InventoryItem', '__getAllItems resolve variantsRelation', variantsRelation );
 										resolve(items);
 									}).catch(reject);
 							}).catch(reject);
@@ -155,6 +157,7 @@ let Model = db.sequelize.define(modelName, {
 			return new Promise((resolve, reject) => {
 				Model.__getAllItems()
 					.then(items => {
+						console.log('InventoryItem', 'Model.__getAllItems()' );
 						resolve(items.filter(item => item.get('type') === TYPE.PRODUCT));
 					})
 					.catch(reject)
@@ -170,6 +173,7 @@ let Model = db.sequelize.define(modelName, {
 		getPage(startId, pageSize) {
 			return new Promise((resolve, reject) => {
 				Model.getItems().then(items => {
+					console.log('InventoryItem', 'Model.getItems().then(items => {' );
 					let i = 0;
 					resolve(items.filter(item => {
 						let predicate = item.get('id') > startId && i < pageSize;
