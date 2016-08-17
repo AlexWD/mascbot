@@ -183,7 +183,10 @@ class Menu {
 	}
 
 	checkOut(inventoryItem) {
-		this.askSeat(inventoryItem);
+		this.askSeat(inventoryItem)
+			.catch(e => {
+				logger.error(e);
+			});
 		// 	.then(seat_address => {
 		// 	// this.convo.ask('Phone Number:', (response, convo) => {
 		// 		this.updateContext(convo);
@@ -198,22 +201,22 @@ class Menu {
 
 	askSeat(inventoryItem) {
 		return new Promise((resolve, reject) => {
-			this.controller.storage.users.get(this.message.user, (err, user) => {
+			//this.controller.storage.users.get(this.message.user, (err, user) => {
 					this.convo.ask('Ok, I love this selection. What is your section/row/seat number 💺:', (response, convo) => {
 						let seatAddress = response.text;
 						this.updateContext(convo);
 
-						this.controller.storage.users.save(
-							{
-								id: this.message.user,
-								seatAddress,
-							},
-							(error) => {
-								if (error) {
-									logger.error('Error saving user', error);
-									this.convo.stop();
-									reject(error);
-								} else {
+						// this.controller.storage.users.save(
+						// 	{
+						// 		id: this.message.user,
+						// 		seatAddress,
+						// 	},
+						// 	(error) => {
+						// 		if (error) {
+						// 			logger.error('Error saving user', error);
+						// 			this.convo.stop();
+						// 			reject(error);
+						// 		} else {
 									ConversationLogger.saveMessage(
 										'Please enter your section/row/seat number 💺:',
 										seatAddress,
@@ -222,20 +225,20 @@ class Menu {
 
 									this.order.setSeatAddress(seatAddress);
 									this.order.addItem(inventoryItem);
-									//this.requestUserPhoto();
+									this.requestUserPhoto();
 									this.convo.next();
 									resolve(seatAddress);
-								}
-							}
-						);
+					// 			}
+					// 		}
+					// 	);
 					});
-					this.convo.next();
+					// this.convo.next();
 
 				// }
-			}).catch(e => {
-				logger.error(e)
-				reject(e);
-			})
+			// }).catch(e => {
+			// 	logger.error(e)
+			// 	reject(e);
+			// })
 
 		})
 	}
