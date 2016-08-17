@@ -8,7 +8,7 @@ console.log('dattabase', process.env.DATABASE_URL);
 console.log('dattabase', config.database.url);
 // ORM connection settings
 const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
-	logging: config.database.logging,
+	logging: config.database.logging ? console.log : false,
 	define: {
 		charset: 'utf8',
 		collate: 'utf8_general_ci',
