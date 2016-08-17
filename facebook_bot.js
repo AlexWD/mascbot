@@ -30,7 +30,7 @@ BotStorage({
 	let persistentMenu = new PersistentMenu(controller);
 	persistentMenu
 		.addAction({
-			title: "google",
+			title: "google 1",
 			type: PersistentMenuStructured.WEBURL,
 			action: "http://google.com",
 		})
