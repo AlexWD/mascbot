@@ -91,6 +91,8 @@ class Menu {
 	showSubMeny(page, startId, pageSize, count) {
 		InventoryItem.getPage(startId, pageSize).then(items => {
 
+			console.log('InventoryItem', items);
+
 			let ids = [];
 			let	q = new GenericTemplate();
 
@@ -154,6 +156,8 @@ class Menu {
 				}
 			)
 
+		}).catch(e => {
+			logger.error(e);
 		})
 
 
