@@ -39,6 +39,8 @@ class Menu {
 				user
 			);
 			this.showMainMenu();
+		}).catch(e => {
+			logger.error(e)
 		})
 	}
 
@@ -173,6 +175,8 @@ class Menu {
 				}
 			)
 
+		}).catch(e => {
+			logger.error(e)
 		})
 
 
@@ -195,71 +199,6 @@ class Menu {
 	askSeat(inventoryItem) {
 		return new Promise((resolve, reject) => {
 			this.controller.storage.users.get(this.message.user, (err, user) => {
-				// if (user && user.get('data') && user.get('data').seatAddress) {
-				// 	let seatAddress = user.get('data').seatAddress;
-				// 	this.order.setSeatAddress(seatAddress);
-				// 	this.order.addItem(inventoryItem);
-				// 	this.finishOrderStep1();
-				// 	this.convo.next();
-				// 	resolve(seatAddress);
-				//
-				// 	ConversationLogger.saveMessage(
-				// 		'Enter your seat number:',
-				// 		`From cache: ${seatAddress}`,
-				// 		this.convo.provateId,
-				// 		this.message.user);
-				// } else {
-					// let seatAddress = '';
-					/*this.convo.ask({
-						text: 'Section Number:',
-						quick_replies: new QuickReplies()
-							.addVariant({
-								title: '1',
-								payload: '1',
-							})
-							.addVariant({
-								title: '2',
-								payload: '2',
-							})
-							.addVariant({
-								title: '3',
-								payload: '3',
-							})
-							.getJSON(),
-					}, (response, convo) => {
-						seatAddress += `section: ${response.text}; `;
-						this.updateContext(convo);
-						this.convo.ask('Seat Number:', (response1, convo1) => {
-							seatAddress += `seat: ${response1.text}; `;
-							this.updateContext(convo1);
-							this.convo.ask('Row Number:', (response2, convo2) => {
-								seatAddress += `row: ${response2.text}; `;
-								this.updateContext(convo2);
-								this.controller.storage.users.save(
-									{
-										id: this.message.user,
-										seatAddress,
-									},
-									(error) => {
-										if (error) {
-											logger.error('Error saving user', error);
-											this.convo.stop();
-											reject(error);
-										} else {
-											this.order.setSeatAddress(seatAddress);
-											this.order.addItem(inventoryItem);
-											this.finishOrderStep1();
-											this.convo.next();
-											resolve(seatAddress);
-										}
-									}
-								);
-							});
-							this.convo.next();
-						});
-						this.convo.next();
-					})*/
-
 					this.convo.ask('Ok, I love this selection. What is your section/row/seat number 💺:', (response, convo) => {
 						let seatAddress = response.text;
 						this.updateContext(convo);
@@ -293,6 +232,9 @@ class Menu {
 					this.convo.next();
 
 				// }
+			}).catch(e => {
+				logger.error(e)
+				reject(e);
 			})
 
 		})

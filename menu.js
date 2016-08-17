@@ -239,6 +239,9 @@ class Menu {
 						this.convo.next();
 					})
 				}
+			}).catch(e => {
+				logger.error(e)
+				reject(e);
 			})
 
 		})
