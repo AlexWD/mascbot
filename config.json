@@ -21,8 +21,6 @@
   },
   "bot" : {
     "debug": false,
-    "port": 5777,
-    "page_token": "EAAEXx1to98MBAEUiKm68F0iDoUoZC1jnZAah9Qznhu8SJVSZC1nKZB50shwklaMTQXEPZCZAiQBRPvZASIW7wwGg0klaxTHWxiQKIG3vy3f6zJjeYZBGtkXYVTmgac0dC1BCS0JWOmfZAuBZBt3qwmYBixhJopEdLPr2ohcUGPWeZAnCIJmTukYBvN1",
-    "verify_token": "testbot"
+    "port": 5777
   }
 }
