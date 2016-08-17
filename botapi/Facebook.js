@@ -127,6 +127,7 @@ function Facebookbot(configuration) {
 		};
 
 		bot.findConversation = function(message, cb) {
+			console.log(message);
 			botkit.debug('CUSTOM FIND CONVO', message.user, message.channel);
 			for (let t = 0; t < botkit.tasks.length; t++) {
 				for (let c = 0; c < botkit.tasks[t].convos.length; c++) {
