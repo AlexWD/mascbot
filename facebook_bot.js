@@ -61,9 +61,6 @@ BotStorage({
 			console.log('CREATE NEW CONVO!!!!!', message);
 			// console.log('GET IMAGE', message.attachments, message.attachments.payload);
 			menu = new Conversation(bot, message, controller);
-		} else {
-			console.log('SHOW MAIN MENU FROM EXISTING', message);
-			menu.showMainMenu();
 		}
 	});
 
