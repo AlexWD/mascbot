@@ -10,19 +10,19 @@ class ConversationLogger {
 	}
 
 	static saveMessage(request, reply, convoId, userId) {
-		Log.create({
-			UserId: userId,
-			request,
-			reply,
-			ConversationId: convoId,
-		})
+		// Log.create({
+		// 	UserId: userId,
+		// 	request,
+		// 	reply,
+		// 	ConversationId: convoId,
+		// })
 	}
 
 	static saveConv(convoId, userId) {
-		Conversation.create({
-			UserId: userId,
-			id: convoId,
-		})
+		// Conversation.create({
+		// 	UserId: userId,
+		// 	id: convoId,
+		// })
 	}
 
 }
