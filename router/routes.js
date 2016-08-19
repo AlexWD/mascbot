@@ -98,7 +98,7 @@ module.exports = (app) => {
 			opts.runner_data = {
 				name: runner.first_name,
 				slack_id: runner.slack_id,
-				channel_name: `s${rd.section_id}r${rd.row_id}s${rd.seat_id}_${date.getYear()}${date.getMonth()}${date.getDate()}`
+				channel_name: `s${rd.section_id}r${rd.row_id}s${rd.seat_id} ${date.getFullYear()}${date.getMonth()}${date.getDate()}`
 			}
 
 			return helperFunctions.createPrivateSlackChannel(opts.runner_data);
