@@ -89,7 +89,8 @@ function sendFBBotMessage(opts) {
 	// logic still a work in progress
 	rp(routeOptions.sendFBBotOptions(opts))
 	.catch((err) => {
-		console.log('Error sending message to FB bot:', err);
+		console.log('Error sending message to FB bot:', err.body.error);
+    console.log('There was an error')
 	})
 }
 
