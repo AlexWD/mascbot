@@ -108,29 +108,23 @@ module.exports = {
     }
   },
 
-	sendFBBotOptions: function(opts) {
-		var date = new Date();
+  sendFBBotOptions: function(opts) {
+    var date = new Date();
 
-		return {
-			method: 'POST',
-			uri: 'https://runner-bot.herokuapp.com/facebook/receive',
-			body: {
-				entry: [{	
-					messaging: [{
-						sender: {
-							id: opts.channel
-						},
-						timestamp: date.getTime(),
-						message: {
-							text: opts.text,
-							attachments: opts.attachments
-						},
-					}]
-				}]
-			},
-			json: true
-		}
-	},
+    return {
+      method: 'POST',
+      uri: `https://graph.facebook.com/v2.6/me/messages?access_token=${config.facebook.page_token}`,
+      body: {
+        recipient: {
+          id: opts.channel
+        },
+        message: {
+          text: opts.text
+        }
+      },
+      json: true
+    }
+  },
 
 	sendSlackBotOptions: function(opts) {
 	  return {

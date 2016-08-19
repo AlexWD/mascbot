@@ -124,15 +124,7 @@ module.exports = (server) => {
 				  if (source_name === 'facebook') {
 				    helperFunctions.sendFBBotMessage({
 				      channel: source_id,
-				      text: 'status_update',
-				      attachments: {
-				        origin: 'slack', 
-				        order: {
-				          status: status,
-				          facebook_channel_id: source_id,
-				          slack_channel_id: message.channel,
-				        }
-				      },
+				      text: messages[status];
 				    })
 				  } else if (source_name === 'twilio') {
 
@@ -202,11 +194,7 @@ module.exports = (server) => {
 				        // Send user the message
 				        helperFunctions.sendFBBotMessage({
 				          channel: sourceId,
-				          text: 'chat_user',
-				          attachments: {
-				            origin: 'slack',
-				            text: message.text
-				          }
+				          text: message.text
 				        })
 				      } else if (source_name === 'twilio') {
 

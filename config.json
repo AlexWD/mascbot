@@ -19,6 +19,13 @@
     "logging": false,
     "url":"postgresql://test:test@localhost:5432/test_facebook"
   },
+  "facebook" : {
+    "debug": true,
+    "port": 5777,
+    "page_token": "EAAHeAPBgqJABAJJ60Ba0ZBFZCtccLA5JZBymVHIJslzbSH85mxu1jpA40wgAgVFAIZCqFeiZCR1HlZA9HNg0E6cD40vMZCf6oZBBs2Q5AgET0K8ti033Ttu2CTuZCUKjaQ6kczldK0eJGy1bzHmttsVcqQtGNyzJ1z5y6ZBSkXI1UvZAQZDZD",
+    "verify_token": "testing_one_two_testing",
+    "test-secret": "4e4c32ec0982325a7889b23c947a60b8"
+  },
   "slack": {
     "test-token": "xoxp-43801518769-60557298036-61745718053-a77b87a44a",
     "verify-token": "2lIFISndLf95COYtmU6vMquC",

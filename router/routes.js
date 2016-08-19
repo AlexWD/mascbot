@@ -58,11 +58,11 @@ module.exports = (app) => {
 			section_id: body.section_id,
 			row_id: body.row_id,
 			seat_id: body.seat_id,
-			order_id: 1,
-			order_item_id: 1,
-			order_details: 'Coke x 1, Hotdog x 2',
-			source_id: '1021852287930220', // facebook_channel_id or twilio number
-			source_name: 'facebook'
+			order_id: body.order_id || 1,
+			order_item_id: body.order_item_id || 1,
+			order_details: body.order_details || 'Coke x 1, Hotdog x 2',
+			source_id: body.source_id || '1021852287930220', // facebook_channel_id or twilio number
+			source_name: body.source_name || 'facebook'
 		};
 
 		// create Order in db
@@ -93,12 +93,12 @@ module.exports = (app) => {
 		// Runner.find({ where: { section_id: rd.section_id} })
 
 		// Runner.find({ where: { section_id: 9} })
-    Runner.find({ where: { first_name: 'Abhi'} })
+    Runner.find({ where: { first_name: 'uche-tester'} })
 		.then((runner) => {
 			opts.runner_data = {
 				name: runner.first_name,
 				slack_id: runner.slack_id,
-				channel_name: `s${rd.section_id}r${rd.row_id}s${rd.seat_id}`
+				channel_name: `s${rd.section_id}r${rd.row_id}s${rd.seat_id}_${date.getYear()}${date.getMonth()}${date.getDate()}`
 			}
 
 			return helperFunctions.createPrivateSlackChannel(opts.runner_data);
