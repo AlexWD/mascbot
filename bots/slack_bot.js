@@ -124,7 +124,7 @@ module.exports = (server) => {
 				  if (source_name === 'facebook') {
 				    helperFunctions.sendFBBotMessage({
 				      channel: source_id,
-				      text: messages[status];
+				      text: messages[status]
 				    })
 				  } else if (source_name === 'twilio') {
 
