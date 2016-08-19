@@ -61,7 +61,7 @@ module.exports = (app) => {
 			order_id: body.order_id || 1,
 			order_item_id: body.order_item_id || 1,
 			order_details: body.order_details || 'Coke x 1, Hotdog x 2',
-			source_id: body.source_id || '1021852287930220', // facebook_channel_id or twilio number
+			source_id: body.source_id || '100000015302589', // facebook_channel_id or twilio number
 			source_name: body.source_name || 'facebook'
 		};
 
