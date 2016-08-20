@@ -12,7 +12,7 @@ OrderItem.belongsTo(Order);
 OrderItem.belongsTo(InventoryItem);
 
 Log.belongsTo(User);
-Log.belongsTo(Conversation);
+//Log.belongsTo(Conversation);
 
 //Conversation.belongsTo(User);
 
