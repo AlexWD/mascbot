@@ -11,7 +11,7 @@ const Conversation = require('./conversation');
 OrderItem.belongsTo(Order);
 OrderItem.belongsTo(InventoryItem);
 
-Log.belongsTo(User);
+//Log.belongsTo(User);
 //Log.belongsTo(Conversation);
 
 //Conversation.belongsTo(User);
