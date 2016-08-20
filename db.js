@@ -1,11 +1,31 @@
 'use strict';
 
-let Sequelize = require('sequelize');
-let config = require('./config');
-let logger = require('./logger');
+const Sequelize = require('sequelize');
+const config = require('./config');
+const logger = require('./logger');
 
+console.log('dattabase', process.env.DATABASE_URL);
+console.log('dattabase', config.database.url);
 // ORM connection settings
-let sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url);
+const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
+	logging: config.database.logging ? console.log : false,
+	define: {
+		charset: 'utf8',
+		collate: 'utf8_general_ci',
+	},
+});
+
+// var match = config.database.url.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+// const sequelize = new Sequelize(match[5], match[1], match[2], {
+//     dialect:  'postgres',
+//     protocol: 'postgres',
+//     port:     match[4],
+//     host:     match[3],
+//     logging: false,
+//     dialectOptions: {
+//         ssl: true
+//     }
+// });
 
 /**
  * Connects to PostgreSQL showing an error if failing.

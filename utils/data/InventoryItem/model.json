@@ -1,51 +1,66 @@
 [
   {
-    "title": "Burger extra chees",
-    "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
-    "price": 23,
-    "quantity": 100,
-    "image": "http://test.designforu.ru/ii/burger.jpeg"
-  },
-  {
     "title": "Burger",
     "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
-    "price": 12,
+    "price": 9,
     "quantity": 100,
-    "image": "http://test.designforu.ru/ii/burger.jpeg"
+    "type": "PRODUCT",
+    "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/burger-2.jpeg"
+  },
+  {
+    "title": "Burger type 1",
+    "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
+    "price": 9,
+    "quantity": 100,
+    "type": "VARIANT",
+    "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/burger-2.jpeg"
   },
   {
     "title": "Fries",
     "description": "simple french fries",
-    "price": 12,
+    "price": 6,
     "quantity": 100,
-    "image": "http://test.designforu.ru/ii/fries.jpeg"
+    "type": "PRODUCT",
+    "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/fries.jpeg"
   },
   {
     "title": "Stadium Hotdog",
-    "description": "Stadium Dog",
-    "price": 12,
+    "description": "Fans favourite hotdog Dog with relish and mustard",
+    "price": 6,
     "quantity": 100,
-    "image": "http://test.designforu.ru/ii/hotdog.jpeg"
+    "type": "PRODUCT",
+    "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/hotdog.jpeg"
   },
   {
-    "title": "Nachos with cheese",
+    "title": "Nachos with extra cheese",
     "description": "Totilla chips, nachos chese and jalapenos",
-    "price": 12,
+    "price": 8,
     "quantity": 100,
-    "image": "http://test.designforu.ru/ii/nachos.jpeg"
+    "type": "PRODUCT",
+    "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/nachos.jpeg"
   },
   {
     "title": "Popcorn",
-    "description": "",
+    "description": "popcorn with butter",
     "price": 12,
     "quantity": 100,
-    "image": "http://test.designforu.ru/ii/popcorn.jpeg"
+    "type": "PRODUCT",
+    "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/popcorn.jpeg"
   },
   {
     "title": "Pretzel",
-    "description": "bavarian pretzel",
+    "description": "bavarian pretzel, kids just love it",
+    "price": 8,
+    "quantity": 100,
+    "type": "PRODUCT",
+    "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/pretzel.jpeg"
+  },
+  {
+    "title": "Burger extra cheese",
+    "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
     "price": 12,
     "quantity": 100,
-    "image": "http://test.designforu.ru/ii/pretzel.jpeg"
+    "type": "PRODUCT",
+    "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/burger-2.jpeg"
   }
 ]

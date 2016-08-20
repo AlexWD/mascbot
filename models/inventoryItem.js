@@ -1,10 +1,21 @@
 'use strict';
 
 const db = require('../db');
-const Button = require('../botapi/structured_content').Button;
-const GenericElement = require('../botapi/structured_content').GenericElement;
+const Button = require('../botapi/structure_content/structured_content').Button;
+const GenericElement = require('../botapi/structure_content/structured_content').GenericElement;
+const NodeCache = require("node-cache");
+const itemsCache = new NodeCache();
+const logger = require('../logger');
 
-let Model = db.sequelize.define('InventoryItem', {
+const TYPE = {
+	PRODUCT: 'PRODUCT',
+	VARIANT: 'VARIANT',
+	COMPLEX: 'COMPLEX',
+};
+
+const modelName = 'InventoryItem';
+
+let Model = db.sequelize.define(modelName, {
 
 	id: {
 		type: db.Sequelize.INTEGER,
@@ -20,19 +31,19 @@ let Model = db.sequelize.define('InventoryItem', {
 	description: {
 		type: db.Sequelize.TEXT,
 		allowNull: false,
-		defaultValue: ''
+		defaultValue: '',
 	},
 
 	price: {
 		type: db.Sequelize.DECIMAL(10, 2),
 		allowNull: false,
-		defaultValue: 0.0
+		defaultValue: 0.0,
 	},
 
 	quantity: {
 		type: db.Sequelize.INTEGER,
 		allowNull: false,
-		defaultValue: 0
+		defaultValue: 0,
 	},
 
 	image: {
@@ -41,9 +52,9 @@ let Model = db.sequelize.define('InventoryItem', {
 	},
 
 	type: {
-		type: db.Sequelize.ENUM('PRODUCT', 'VARIANT', 'COMPLEX'),
+		type: db.Sequelize.ENUM(TYPE.PRODUCT, TYPE.VARIANT, TYPE.COMPLEX),
 		allowNull: false,
-		defaultValue: 'EMPTY'
+		defaultValue: TYPE.PRODUCT,
 	},
 
 }, {
@@ -77,7 +88,7 @@ let Model = db.sequelize.define('InventoryItem', {
 				title: this.get('title'),
 				item_url: "",
 				image_url: this.get('image'),
-				subtitle: this.get('description')
+				subtitle: this.get('description'),
 			})
 				.addButton(
 					new Button({
@@ -86,49 +97,95 @@ let Model = db.sequelize.define('InventoryItem', {
 						type: Button.POSTBACK,
 					})
 				)
+		},
 
+		// get product variants from cache
+		getProductVariants() {
+			// return new Promise((resolve, reject) => {
+			let ids = [];
+			itemsCache.get('variantsRelation').forEach(item => {
+				if (this.get('id') === item.id) {
+					ids.push(item.VariantId);
+				}
+			});
+
+			return itemsCache.get(modelName).filter(item => {
+				return ids.indexOf(item.get('id')) >= 0;
+			});
+
+			// })
 		},
 
 	},
 
 	classMethods: {
 
-		type: {
-			PRODUCT: 'PRODUCT',
-			VARIANT: 'VARIANT',
-			COMPLEX: 'COMPLEX',
-		},
+		type: TYPE,
 
-		getItems() {
+		__getAllItems() {
 			return new Promise((resolve, reject) => {
-				Model.findAll({})
-					.then(resolve)
-					.catch(error => {
-						logger.error('PostgreSQL: ' + error.message, error);
-						reject(error);
-					});
+				if (itemsCache.get(modelName)) {
+					console.log('InventoryItem', '__getAllItems resolve itemsCache.get(modelName)', itemsCache.get(modelName) );
+					resolve(itemsCache.get(modelName));
+					return;
+				}
+				Model.findAll({
+					order: 'id',
+				})
+					.then(items => {
+						itemsCache.set(modelName, items);
+						logger.info(`Cached ${items.length} items`);
+						db.sequelize.query('SELECT * FROM "InventoryItemsVariants"',
+							{ type: db.sequelize.QueryTypes.SELECT})
+							.then((variantsRelation) => {
+								itemsCache.set('variantsRelation', variantsRelation);
+								logger.info(`Cached ${variantsRelation.length} variantRelations`);
+								db.sequelize.query('SELECT * FROM "InventoryItemsComplexProducts"',
+									{ type: db.sequelize.QueryTypes.SELECT})
+									.then((complexProductRelation) => {
+										itemsCache.set('complexProductRelation', complexProductRelation);
+										logger.info(`Cached ${variantsRelation.length} complexRelations`);
+										console.log('InventoryItem', '__getAllItems resolve variantsRelation', variantsRelation );
+										resolve(items);
+									}).catch(reject);
+							}).catch(reject);
+					}).catch(reject)
 			});
 		},
 
+		// get all products from cache
+		getItems() {
+			return new Promise((resolve, reject) => {
+				Model.__getAllItems()
+					.then(items => {
+						console.log('InventoryItem', 'Model.__getAllItems()' );
+						resolve(items.filter(item => item.get('type') === TYPE.PRODUCT));
+					})
+					.catch(reject)
+			});
+		},
+
+		/**
+		 * Get products for displaying in bot.
+		 * @param startId
+		 * @param pageSize
+		 * @returns {Promise}
+		 */
 		getPage(startId, pageSize) {
 			return new Promise((resolve, reject) => {
-				Model.findAll({
-					where: {
-						id: {
-							$gt: startId,
+				Model.getItems().then(items => {
+					console.log('InventoryItem', 'Model.getItems().then(items => {' );
+					let i = 0;
+					resolve(items.filter(item => {
+						let predicate = item.get('id') > startId && i < pageSize;
+						if (predicate) {
+							i++;
 						}
-
-					},
-					limit: pageSize,
-					order: 'id',
-				})
-					.then(resolve)
-					.catch(error => {
-						logger.error('PostgreSQL: ' + error.message, error);
-						reject(error);
-					});
+						return predicate;
+					}))
+				}).catch(reject);
 			})
-		}
+		},
 
 	},
 });

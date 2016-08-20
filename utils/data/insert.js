@@ -16,7 +16,7 @@ function insertIteration(Model) {
 
 		let obj = JSON.parse(fs.readFileSync(__dirname + path.sep + Model.name + path.sep + 'model.json', 'utf8'));
 
-		Model.destroy({ force: true, where: { id: {$gt: 0} }}).then(() => {
+		// Model.destroy({ force: true, where: { id: {$gt: 0} }}).then(() => {
 
 			Model.bulkCreate(obj)
 				.then(o => {
@@ -28,7 +28,7 @@ function insertIteration(Model) {
 					reject(err);
 				});
 
-		});
+		// });
 	});
 }
 
