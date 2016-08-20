@@ -14,7 +14,7 @@ OrderItem.belongsTo(InventoryItem);
 Log.belongsTo(User);
 Log.belongsTo(Conversation);
 
-Conversation.belongsTo(User);
+//Conversation.belongsTo(User);
 
 Order.hasMany(OrderItem);
 
