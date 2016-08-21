@@ -6,6 +6,7 @@ const OrderItem = require('./orderItem');
 const User = require('./user');
 const Log = require('./logs');
 const Conversation = require('./conversation');
+const Runner = require('./runner');
 
 // Assosiations
 OrderItem.belongsTo(Order);
@@ -17,6 +18,7 @@ OrderItem.belongsTo(InventoryItem);
 //Conversation.belongsTo(User);
 
 Order.hasMany(OrderItem);
+Runner.hasMany(Order);
 
 InventoryItem.belongsToMany(InventoryItem,
 	{
@@ -38,6 +40,7 @@ module.exports.OrderItem = OrderItem;
 module.exports.Log = Log;
 module.exports.User = User;
 module.exports.Conversation = Conversation;
+module.exports.Runner = Runner;
 
-module.exports.Models = [InventoryItem, Order, OrderItem, User, Conversation, Log];
+module.exports.Models = [InventoryItem, Order, OrderItem, User, Conversation, Log, Runner];
 
