@@ -188,6 +188,8 @@ let Model = db.sequelize.define(modelName, {
 		},
 
 	},
+timestamps  : true,
+underscored : true
 });
 
 module.exports = Model;
