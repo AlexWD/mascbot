@@ -57,6 +57,8 @@ let Model = db.sequelize.define(modelName, {
 	classMethods: {
 
 	},
+timestamps  : true,
+underscored : true
 });
 
 module.exports = Model;
