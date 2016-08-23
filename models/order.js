@@ -82,7 +82,8 @@ let Model = db.sequelize.define('Order', {
 		FINISHED: 'FINISHED',
 
 	},
-
+timestamps  : true,
+underscored : true
 });
 
 module.exports = Model;
