@@ -31,6 +31,8 @@ let Model = db.sequelize.define('OrderItems', {
 		},
 
 	},
+timestamps  : true,
+underscored : true
 });
 
 module.exports = Model;
