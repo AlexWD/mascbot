@@ -7,7 +7,7 @@ const modelName = 'User';
 let Model = db.sequelize.define(modelName, {
 
 	id: {
-		type: db.Sequelize.STRING,
+		type: db.Sequelize.BIGINT,
 		primaryKey: true,
 	},
 

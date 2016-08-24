@@ -35,6 +35,7 @@ class Order {
 								OrderId: this.order.get('id'),
 								quantity: this.items[key].quantity,
 								price: this.items[key].price,
+								total: this.items[key].price * this.items[key].quantity,
 							}
 						})
 					).then(() => {
