@@ -6,7 +6,7 @@ const logger = require('./logger');
 
 console.log('database DATABASE_URL:', process.env.DATABASE_URL);
 console.log('database localurl:', config.database.url);
-ORM connection settings
+//ORM connection settings
 const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
 	logging: config.database.logging ? console.log : true,
 	define: {
