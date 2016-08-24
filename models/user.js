@@ -47,6 +47,30 @@ let Model = db.sequelize.define(modelName, {
 		allowNull: true,
 	},
 
+	phone: {
+		type: db.Sequelize.STRING,
+		allowNull: false,
+		defaultValue: '',
+	},
+
+	seat_address: {
+		type: db.Sequelize.STRING,
+		allowNull: false,
+		defaultValue: '',
+	},
+
+	stadium: {
+		type: db.Sequelize.STRING,
+		allowNull: false,
+		defaultValue: '',
+	},
+
+	game: {
+		type: db.Sequelize.STRING,
+		allowNull: false,
+		defaultValue: '',
+	},
+
 }, {
 	tableName: 'users',
 

@@ -9,8 +9,8 @@ const Conversation = require('./conversation');
 const Runner = require('./runner');
 
 // Assosiations
-//OrderItem.belongsTo(Order);
-//OrderItem.belongsTo(InventoryItem);
+OrderItem.belongsTo(Order);
+OrderItem.belongsTo(InventoryItem);
 
 //Log.belongsTo(User);
 //Log.belongsTo(Conversation);

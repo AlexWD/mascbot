@@ -40,6 +40,18 @@ let Model = db.sequelize.define('Order', {
 		defaultValue: '',
 	},
 
+	bot_channel: {
+		type: db.Sequelize.STRING,
+		allowNull: true,
+		defaultValue: '',
+	},
+
+	total: {
+		type: db.Sequelize.DECIMAL(10, 2),
+		allowNull: true,
+		defaultValue: 0.0,
+	},
+
 }, {
 	tableName: 'orders',
 	indexes: [
