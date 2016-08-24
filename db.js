@@ -4,15 +4,19 @@ const Sequelize = require('sequelize');
 const config = require('./config');
 const logger = require('./logger');
 
-console.log('dattabase', process.env.DATABASE_URL);
-console.log('dattabase', config.database.url);
-// ORM connection settings
+console.log('database DATABASE_URL:', process.env.DATABASE_URL);
+console.log('database localurl:', config.database.url);
+ORM connection settings
 const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
 	logging: config.database.logging ? console.log : false,
 	define: {
 		charset: 'utf8',
 		collate: 'utf8_general_ci',
 	},
+	dialectOptions: {
+    supportBigNumbers: true,
+    bigNumberStrings: true
+  }
 });
 
 // var match = config.database.url.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
