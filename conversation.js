@@ -225,7 +225,7 @@ class Menu {
 
 									this.order.setSeatAddress(seatAddress);
 									this.order.addItem(inventoryItem);
-									this.requestUserPhoto();
+									//this.requestUserPhoto();
 									this.convo.next();
 									resolve(seatAddress);
 					// 			}
