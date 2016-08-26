@@ -20,10 +20,14 @@ let Model = db.sequelize.define('OrderItems', {
 	
 	order_id: {
 	 type: db.Sequelize.INTEGER, 
-	 references: Order, 
-	 referencesKey: "id",
+	 references: { model: "Order", key: "id" }
 	},
 
+
+	inventory_order_item_id: {
+	 type: db.Sequelize.INTEGER, 
+	 references: { model: "InventoryItem", key: "id" }
+	},
 
 }, {
 	tableName: 'order_items',
