@@ -4,15 +4,15 @@
     "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
     "price": 9,
     "quantity": 100,
-    "type": "PRODUCT",
+    "item_type": "PRODUCT",
     "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/burger-2.jpeg"
   },
   {
-    "title": "Burger type 1",
+    "title": "Burger item type 1",
     "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
     "price": 9,
     "quantity": 100,
-    "type": "VARIANT",
+    "item_type": "VARIANT",
     "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/burger-2.jpeg"
   },
   {
@@ -20,7 +20,7 @@
     "description": "simple french fries",
     "price": 6,
     "quantity": 100,
-    "type": "PRODUCT",
+    "item_type": "PRODUCT",
     "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/fries.jpeg"
   },
   {
@@ -28,7 +28,7 @@
     "description": "Fans favourite hotdog Dog with relish and mustard",
     "price": 6,
     "quantity": 100,
-    "type": "PRODUCT",
+    "item_type": "PRODUCT",
     "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/hotdog.jpeg"
   },
   {
@@ -36,7 +36,7 @@
     "description": "Totilla chips, nachos chese and jalapenos",
     "price": 8,
     "quantity": 100,
-    "type": "PRODUCT",
+    "item_type": "PRODUCT",
     "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/nachos.jpeg"
   },
   {
@@ -44,7 +44,7 @@
     "description": "popcorn with butter",
     "price": 12,
     "quantity": 100,
-    "type": "PRODUCT",
+    "item_type": "PRODUCT",
     "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/popcorn.jpeg"
   },
   {
@@ -52,7 +52,7 @@
     "description": "bavarian pretzel, kids just love it",
     "price": 8,
     "quantity": 100,
-    "type": "PRODUCT",
+    "item_type": "PRODUCT",
     "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/pretzel.jpeg"
   },
   {
@@ -60,7 +60,7 @@
     "description": "Chipotle mayo, Fried jalepenos and pepper jack cheese",
     "price": 12,
     "quantity": 100,
-    "type": "PRODUCT",
+    "item_type": "PRODUCT",
     "image": "https://s3-us-west-1.amazonaws.com/seatjoy.io/assets/img/burger-2.jpeg"
   }
 ]

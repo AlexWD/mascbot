@@ -51,7 +51,7 @@ let Model = db.sequelize.define(modelName, {
 		allowNull: false,
 	},
 
-	type: {
+	item_type: {
 		type: db.Sequelize.ENUM(TYPE.PRODUCT, TYPE.VARIANT, TYPE.COMPLEX),
 		allowNull: false,
 		defaultValue: TYPE.PRODUCT,
