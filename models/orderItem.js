@@ -1,6 +1,8 @@
 'use strict';
 
 const db = require('../db');
+const InventoryItem = require('./inventoryItem');
+const Order = require('./order');
 
 let Model = db.sequelize.define('OrderItems', {
 
@@ -15,6 +17,13 @@ let Model = db.sequelize.define('OrderItems', {
 		allowNull: false,
 		defaultValue: 0,
 	},
+	
+	order_id: {
+	 type: db.Sequelize.INTEGER, 
+	 references: Order, 
+	 referencesKey: "id",
+	},
+
 
 }, {
 	tableName: 'order_items',
