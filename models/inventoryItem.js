@@ -159,7 +159,7 @@ let Model = db.sequelize.define(modelName, {
 				Model.__getAllItems()
 					.then(items => {
 						console.log('InventoryItem', 'Model.__getAllItems()' );
-						resolve(items.filter(item => item.get('type') === TYPE.PRODUCT));
+						resolve(items.filter(item => item.get('item_type') === TYPE.PRODUCT));
 					})
 					.catch(reject)
 			});
