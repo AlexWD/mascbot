@@ -42,6 +42,5 @@ timestamps  : true,
 underscored : true
 });
 
-
-db.sequelize.sync({ force: true });
+//db.sequelize.sync({ force: true });
 module.exports = Model;

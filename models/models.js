@@ -9,15 +9,16 @@ const Conversation = require('./conversation');
 const Runner = require('./runner');
 
 // Assosiations
-OrderItem.belongsTo(Order ,{ onDelete: 'SET NULL', onUpdate: 'CASCADE' });
-OrderItem.belongsTo(InventoryItem ,{ onDelete: 'SET NULL', onUpdate: 'CASCADE' });
+Order.hasMany(OrderItem);
+
+OrderItem.belongsTo(Order ,{ foreignKey:'order_id', foreignKeyConstraint:true});
+OrderItem.belongsTo(InventoryItem ,{ foreignKey:'inventory_item_id', foreignKeyConstraint:true});
 
 //Log.belongsTo(User);
 //Log.belongsTo(Conversation);
 
 //Conversation.belongsTo(User);
 
-Order.hasMany(OrderItem);
 Runner.hasMany(Order);
 
 InventoryItem.belongsToMany(InventoryItem,
