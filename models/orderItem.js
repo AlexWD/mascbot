@@ -18,16 +18,16 @@ let Model = db.sequelize.define('OrderItems', {
 		defaultValue: 0,
 	},
 	
-	// order_id: {
-	//  type: db.Sequelize.INTEGER, 
-	//  references: { model: 'Order', key: 'id' },
-	// },
+	order_id: {
+	 type: db.Sequelize.INTEGER, 
+	 references: { model: 'Order', key: 'id' },
+	},
 
 
-	// inventory_order_item_id: {
-	//  type: db.Sequelize.INTEGER, 
-	//  references: { model: 'InventoryItem', key: 'id' },
-	// },
+	inventory_order_item_id: {
+	 type: db.Sequelize.INTEGER, 
+	 references: { model: 'InventoryItem', key: 'id' },
+	},
 
 }, {
 	tableName: 'order_items',
@@ -42,4 +42,6 @@ timestamps  : true,
 underscored : true
 });
 
+
+db.sequelize.sync({ force: true });
 module.exports = Model;
