@@ -8,8 +8,8 @@ console.log('database DATABASE_URL:', process.env.DATABASE_URL);
 console.log('database localurl:', config.database.url);
 //ORM connection settings
 const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
-	//logging: config.database.logging ? console.log : true,
-	logging: true,
+	logging: console.log ,
+	//logging: true,
 	define: {
 		charset: 'utf8',
 		collate: 'utf8_general_ci',

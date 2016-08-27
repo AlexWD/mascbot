@@ -20,7 +20,7 @@
     "url":"postgresql://abhi:abhi@localhost:5432/abhi"
   },
   "bot" : {
-    "debug": false,
+    "debug": true,
     "port": 5777
   }
 }
