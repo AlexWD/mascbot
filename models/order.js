@@ -29,9 +29,9 @@ let Model = db.sequelize.define('Order', {
 	},
 
 	status: {
-		type: db.Sequelize.ENUM('EMPTY', 'NEW', 'FINISHED'),
+		type: db.Sequelize.STRING,
 		allowNull: false,
-		defaultValue: 'EMPTY',
+		defaultValue: 'PENDING',
 	},
 
 	stadium: {
@@ -88,12 +88,13 @@ let Model = db.sequelize.define('Order', {
 
 	},
 
-	classMethods: {
+	// classMethods: {
 
-		NEW: 'NEW',
-		FINISHED: 'FINISHED',
+	// 	PENDING: 'PENDING',
+	// 	DELIVERED: 'DELIVERED',
+	// 	CANCELED:'CANCELED',
 
-	},
+	// },
 timestamps  : true,
 underscored : true
 });
