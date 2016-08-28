@@ -30,16 +30,17 @@ class Order {
 				try {
 					OrderItem.bulkCreate(
 						Object.keys(this.items).map(key => {
+							logger.debug('debugging order items', this.items[key].inventoryItem.get('id'),this.order.get('id'));
 							return {
-								InventoryItemId: this.items[key].inventoryItem.get('id'),
-								OrderId: this.order.get('id'),
+								inventory_item_id: this.items[key].inventoryItem.get('id'),
+								order_id: this.order.get('id'),
 								quantity: this.items[key].quantity,
 								price: this.items[key].price,
 								total: this.items[key].price * this.items[key].quantity,
 							}
 						})
 					).then(() => {
-						logger.debug('bulkCreated');
+						//logger.debug('bulkCreated',OrderItem);
 						resolve(order);
 					}).catch(reject)
 				}catch (e) {

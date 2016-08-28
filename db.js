@@ -8,8 +8,6 @@ console.log('database DATABASE_URL:', process.env.DATABASE_URL);
 console.log('database localurl:', config.database.url);
 //ORM connection settings
 const sequelize = new Sequelize(process.env.DATABASE_URL || config.database.url, {
-	logging: console.log , 
-	raw: true,
 	//logging: true,
 	define: {
 		charset: 'utf8',
@@ -46,7 +44,7 @@ exports.init = (cb) => {
 			// logger.log("*", "PostgreSQL: db initialized.");
 			// cb();
 			sequelize.sync().then(() => {
-				force: true;
+				//force: true;
 				logger.info('*', 'PostgreSQL: db sync.');
 				cb();
 			}).catch((error) => {

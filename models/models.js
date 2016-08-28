@@ -9,10 +9,13 @@ const Conversation = require('./conversation');
 const Runner = require('./runner');
 
 // Assosiations
-Order.hasMany(OrderItem);
+//Order.hasMany(OrderItem);
 
-OrderItem.belongsTo(Order ,{ foreignKey:'order_id', foreignKeyConstraint:true});
-OrderItem.belongsTo(InventoryItem ,{ foreignKey:'inventory_item_id', foreignKeyConstraint:true});
+ OrderItem.belongsTo(Order ,{ 
+    foreignKey: 'order_id',
+     foreignKeyConstraint:true
+});
+ OrderItem.belongsTo(InventoryItem ,{ foreignKey:'inventory_item_id', foreignKeyConstraint:true});
 
 //Log.belongsTo(User);
 //Log.belongsTo(Conversation);

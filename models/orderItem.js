@@ -21,12 +21,14 @@ let Model = db.sequelize.define('OrderItems', {
 	order_id: {
 	 type: db.Sequelize.INTEGER, 
 	 references: { model: Order, key: 'id' },
+	 allowNull: false,
 	},
 
 
 	inventory_item_id: {
 	 type: db.Sequelize.INTEGER, 
 	 references: { model: InventoryItem, key: 'id' },
+	 allowNull: false,
 	},
 
 }, {
@@ -38,6 +40,17 @@ let Model = db.sequelize.define('OrderItems', {
 		},
 
 	},
+	
+    classMethods: {
+      associate: function(models) {
+        Task.belongsTo(models.User, {
+          onUpdate: "CASCADE",
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      }
+    },
 timestamps  : true,
 underscored : true
 });

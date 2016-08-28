@@ -19,10 +19,11 @@ BotStorage({
 	const controller = Facebookbot({
 		storage: botStorage,
 		debug: config.bot.debug,
-		logLevel: 7,
+		logLevel: 10,
 		access_token: process.env.page_token || config.bot.page_token,
 		verify_token: process.env.verify_token || config.bot.verify_token,
 	});
+
 
 	const bot = controller.spawn({});
 	let menu = null;
