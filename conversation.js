@@ -31,7 +31,7 @@ class Menu {
 			this.order = new Order(
 				{
 					seat_address: '',
-					status: Order.NEW,
+					// status: Order.NEW,
 					stadium: 'Avaya Stadium',
 					phone: `${this.user.get('id')}`,
 					game: 'SJ vs NYCFC',
@@ -424,7 +424,7 @@ class Menu {
 							this.convo.provateId,
 							this.message.user);
 						this.updateContext(convo);
-						this.order.setStatus(Order.FINISHED);
+						// this.order.setStatus(Order.FINISHED);
 						this.order.save().then(() => {
 							this.order = null;
 							//this.convo.stop();
