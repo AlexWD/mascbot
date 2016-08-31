@@ -32,7 +32,7 @@ class Order {
 						Object.keys(this.items).map(key => {
 							logger.debug('debugging order items', this.items[key].inventoryItem.get('id'),this.order.get('id'));
 							return {
-								inventory_item_id: this.items[key].inventoryItem.get('id'),
+								inventory_order_item_id: this.items[key].inventoryItem.get('id'),
 								order_id: this.order.get('id'),
 								quantity: this.items[key].quantity,
 								price: this.items[key].price,

@@ -15,7 +15,7 @@ const Runner = require('./runner');
     foreignKey: 'order_id',
      foreignKeyConstraint:true
 });
- OrderItem.belongsTo(InventoryItem ,{ foreignKey:'inventory_item_id', foreignKeyConstraint:true});
+ OrderItem.belongsTo(InventoryItem ,{ foreignKey:'inventory_order_item_id', foreignKeyConstraint:true});
 
 //Log.belongsTo(User);
 //Log.belongsTo(Conversation);

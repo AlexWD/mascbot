@@ -25,7 +25,7 @@ let Model = db.sequelize.define('OrderItems', {
 	},
 
 
-	inventory_item_id: {
+	inventory_order_item_id: {
 	 type: db.Sequelize.INTEGER, 
 	 references: { model: InventoryItem, key: 'id' },
 	 allowNull: false,
