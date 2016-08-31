@@ -41,16 +41,6 @@ let Model = db.sequelize.define('OrderItems', {
 
 	},
 	
-    classMethods: {
-      associate: function(models) {
-        Task.belongsTo(models.User, {
-          onUpdate: "CASCADE",
-          foreignKey: {
-            allowNull: false
-          }
-        });
-      }
-    },
 timestamps  : true,
 underscored : true
 });

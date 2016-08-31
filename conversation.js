@@ -339,10 +339,10 @@ class Menu {
 							this.convo.provateId,
 							this.message.user);
 						this.updateContext(convo);
-						this.order.save().then(() => {
-							this.finishOrderStep2();
-							this.convo.next();
-						})
+						// this.order.save().then(() => {
+						// 	this.finishOrderStep2();
+						// 	this.convo.next();
+						// })
 					},
 				},
 				{
@@ -427,7 +427,7 @@ class Menu {
 						// this.order.setStatus(Order.FINISHED);
 						this.order.save().then(() => {
 							this.order = null;
-							//this.convo.stop();
+							this.convo.stop();
 							this.start();
 						})
 						
