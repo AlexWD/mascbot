@@ -84,7 +84,7 @@ class Order {
 
 		let template = new ReceiptTemplate({
 			name: `${this.user.get('first_name')} ${this.user.get('last_name')}`,
-			id: this.order.get('id'),
+			//id: this.order.get('id'),
 			seat_address: this.order.get('seat_address'),
 			total: this.getTotalPrice(),
 		});
