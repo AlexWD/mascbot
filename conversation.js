@@ -339,9 +339,10 @@ class Menu {
 							this.convo.provateId,
 							this.message.user);
 						this.updateContext(convo);
+						this.finishOrderStep2();
+						this.convo.next();
 						// this.order.save().then(() => {
-						// 	this.finishOrderStep2();
-						// 	this.convo.next();
+						
 						// })
 					},
 				},
